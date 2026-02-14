@@ -1,0 +1,33 @@
+{
+  "name": "mucu",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A shadcn/ui-style React component library with CSS Modules",
+  "type": "module",
+  "scripts": {
+    "build": "pnpm -r build",
+    "dev": "pnpm -r --parallel dev",
+    "storybook": "pnpm --filter registry storybook",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "prepare": "husky",
+    "changeset": "changeset",
+    "version": "changeset version",
+    "release": "pnpm build && changeset publish"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.29.8",
+    "@commitlint/cli": "^20.4.1",
+    "@commitlint/config-conventional": "^20.4.1",
+    "@vitest/coverage-v8": "^3.0.0",
+    "husky": "^9.1.7",
+    "tsx": "^4.21.0",
+    "vitest": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": "10.26.1"
+  },
+  "packageManager": "pnpm@10.26.1"
+}

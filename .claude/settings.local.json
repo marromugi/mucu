@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pnpm --filter mucu build:*)",
+      "Bash(node /Users/marromugi/Lab/purr/packages/cli/dist/index.js:*)",
+      "Bash(tree:*)",
+      "Bash(npx tsx:*)",
+      "Bash(pnpm install:*)",
+      "Bash(pnpm exec tsx:*)",
+      "Bash(pnpm build:*)",
+      "Bash(pnpm test:run:*)",
+      "Bash(pnpm test:*)",
+      "WebFetch(domain:www.npmjs.com)",
+      "WebFetch(domain:registry.npmjs.org)"
+    ],
+    "deny": [
+      "Bash(npm:*)",
+      "Bash(yarn:*)",
+      "Bash(bun:*)",
+      "Bash(rm -rf:*)",
+      "Bash(sudo :*)"
+    ]
+  }
+}
