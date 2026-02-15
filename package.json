@@ -1,7 +1,6 @@
 {
   "name": "mucu",
   "version": "0.1.0",
-  "private": true,
   "description": "A shadcn/ui-style React component library with CSS Modules",
   "type": "module",
   "scripts": {
