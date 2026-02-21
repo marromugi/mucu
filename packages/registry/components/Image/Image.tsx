@@ -1,59 +1,34 @@
 import { forwardRef, useCallback, useState } from 'react'
-import { cn } from '../../../lib'
-import { image } from './const'
-import type { ImageProps } from './type'
+import { Spinner } from '../Spinner'
+import { imageVariants } from './const'
+import type { ImageOwnProps } from './type'
 
-const spinnerKeyframes = `
-@keyframes image-spinner-dash {
-  0% { stroke-dasharray: 1, 150; stroke-dashoffset: 0; }
-  50% { stroke-dasharray: 90, 150; stroke-dashoffset: -35; }
-  100% { stroke-dasharray: 90, 150; stroke-dashoffset: -124; }
-}
-@keyframes image-spinner-rotate {
-  100% { transform: rotate(360deg); }
-}
-`
-
-function LoadingSpinner() {
-  return (
-    <div className="absolute inset-0 flex items-center justify-center">
-      <style>{spinnerKeyframes}</style>
-      <svg
-        className="h-10 w-10"
-        viewBox="0 0 50 50"
-        style={{ animation: 'image-spinner-rotate 2s linear infinite' }}
-      >
-        <circle
-          cx="25"
-          cy="25"
-          r="20"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="6"
-          strokeLinecap="round"
-          className="/20"
-          style={{
-            animation: 'image-spinner-dash 1.5s ease-in-out infinite',
-          }}
-        />
-      </svg>
-    </div>
-  )
-}
-
-export const Image = forwardRef<HTMLImageElement, ImageProps>(
+export const Image = forwardRef<HTMLImageElement, ImageOwnProps>(
   (
-    { alt, src, radius, objectFit, isLoading, fallback, className, onLoad, onError, ...props },
-    ref
+    {
+      alt,
+      src,
+      radius,
+      objectFit,
+      isLoading,
+      fallback,
+      className,
+      onLoad,
+      onError,
+      ...props
+    },
+    ref,
   ) => {
-    const [status, setStatus] = useState<'loading' | 'loaded' | 'error'>('loading')
+    const [status, setStatus] = useState<'loading' | 'loaded' | 'error'>(
+      'loading',
+    )
 
     const handleLoad = useCallback(
       (e: React.SyntheticEvent<HTMLImageElement>) => {
         setStatus('loaded')
         onLoad?.(e)
       },
-      [onLoad]
+      [onLoad],
     )
 
     const handleError = useCallback(
@@ -61,7 +36,7 @@ export const Image = forwardRef<HTMLImageElement, ImageProps>(
         setStatus('error')
         onError?.(e)
       },
-      [onError]
+      [onError],
     )
 
     const isImageLoading = isLoading ?? status === 'loading'
@@ -73,25 +48,32 @@ export const Image = forwardRef<HTMLImageElement, ImageProps>(
 
     const ariaProps = alt === '' ? { role: 'presentation' as const } : {}
 
+    const { root, img } = imageVariants({
+      radius,
+      objectFit,
+      isVisible: !isImageLoading,
+    })
+
     return (
-      <div className={cn('relative inline-flex overflow-hidden', image({ radius }), className)}>
+      <div className={root({ className })}>
         <img
           ref={ref}
           src={src}
           alt={alt}
-          className={cn(
-            'h-full w-full',
-            image({ objectFit }),
-            isImageLoading && 'opacity-0',
-            !isImageLoading && 'opacity-100'
-          )}
+          className={img()}
           onLoad={handleLoad}
           onError={handleError}
           {...ariaProps}
           {...props}
         />
-        {isImageLoading && <LoadingSpinner />}
+        {isImageLoading && (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <Spinner size="lg" />
+          </div>
+        )}
       </div>
     )
-  }
+  },
 )
+
+Image.displayName = 'Image'

@@ -1,24 +1,32 @@
 import { tv } from 'tailwind-variants'
 
-export const image = tv({
-  base: ['transition-all', 'duration-500', 'ease-in-out'],
+export const imageVariants = tv({
+  slots: {
+    root: 'relative inline-flex overflow-hidden',
+    img: ['h-full w-full', 'transition-all duration-500 ease-in-out'],
+  },
   variants: {
     radius: {
-      none: 'rounded-none',
-      sm: 'rounded-sm',
-      md: 'rounded-md',
-      lg: 'rounded-lg',
-      full: 'rounded-full',
+      none: { root: 'rounded-none' },
+      sm: { root: 'rounded-sm' },
+      md: { root: 'rounded-md' },
+      lg: { root: 'rounded-lg' },
+      full: { root: 'rounded-full' },
     },
     objectFit: {
-      cover: 'object-cover',
-      contain: 'object-contain',
-      fill: 'object-fill',
-      none: 'object-none',
+      cover: { img: 'object-cover' },
+      contain: { img: 'object-contain' },
+      fill: { img: 'object-fill' },
+      none: { img: 'object-none' },
+    },
+    isVisible: {
+      true: { img: 'opacity-100' },
+      false: { img: 'opacity-0' },
     },
   },
   defaultVariants: {
     radius: 'none',
     objectFit: 'cover',
+    isVisible: false,
   },
 })
