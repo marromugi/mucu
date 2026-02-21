@@ -1,0 +1,268 @@
+.section {
+  margin-bottom: 2.5rem;
+}
+
+.sectionTitle {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-body);
+  margin: 0 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--color-divider);
+}
+
+/* ---------- Color Swatch ---------- */
+
+.swatch {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 5rem;
+}
+
+.swatchPreview {
+  width: 100%;
+  height: 3rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-outline);
+}
+
+.swatchInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.swatchLabel {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-body);
+}
+
+.swatchVar {
+  font-size: var(--font-size-xs);
+  font-family: var(--font-mono);
+  color: var(--color-text-description);
+}
+
+/* ---------- Scale ---------- */
+
+.scaleGroup {
+  margin-bottom: 1.5rem;
+}
+
+.scaleTitle {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-body);
+  margin: 0 0 0.5rem;
+}
+
+.scaleRow {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+/* ---------- Semantic Colors ---------- */
+
+.semanticGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+  gap: 1rem;
+}
+
+.semanticSwatch {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-outline);
+}
+
+.semanticPreview {
+  width: 2.5rem;
+  height: 2.5rem;
+  flex-shrink: 0;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-outline);
+}
+
+.semanticInfo {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.semanticLabel {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-body);
+}
+
+.semanticVar {
+  font-size: var(--font-size-xs);
+  font-family: var(--font-mono);
+  color: var(--color-text-description);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ---------- Spacing ---------- */
+
+.spacingRow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.spacingLabel {
+  width: 6rem;
+  flex-shrink: 0;
+  font-size: var(--font-size-sm);
+  font-family: var(--font-mono);
+  color: var(--color-text-description);
+  text-align: right;
+}
+
+.spacingBar {
+  height: 1rem;
+  background-color: var(--color-primary-400);
+  border-radius: var(--radius-sm);
+}
+
+.spacingValue {
+  font-size: var(--font-size-xs);
+  font-family: var(--font-mono);
+  color: var(--color-text-description);
+  flex-shrink: 0;
+}
+
+/* ---------- Size ---------- */
+
+.sizeRow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.sizeLabel {
+  width: 6rem;
+  flex-shrink: 0;
+  font-size: var(--font-size-sm);
+  font-family: var(--font-mono);
+  color: var(--color-text-description);
+  text-align: right;
+}
+
+.sizeBox {
+  height: 1.5rem;
+  background-color: var(--color-success-400);
+  border-radius: var(--radius-sm);
+}
+
+.sizeValue {
+  font-size: var(--font-size-xs);
+  font-family: var(--font-mono);
+  color: var(--color-text-description);
+  flex-shrink: 0;
+}
+
+/* ---------- Typography ---------- */
+
+.typographyTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.typographyTable th {
+  text-align: left;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-description);
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid var(--color-divider);
+}
+
+.typographyTable td {
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid var(--color-divider);
+  vertical-align: middle;
+}
+
+.typographyVar {
+  font-size: var(--font-size-xs);
+  font-family: var(--font-mono);
+  color: var(--color-text-description);
+}
+
+/* ---------- Border Radius ---------- */
+
+.radiusGrid {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.radiusItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.radiusPreview {
+  width: 4rem;
+  height: 4rem;
+  background-color: var(--color-primary-300);
+  border: 1px solid var(--color-outline);
+}
+
+.radiusLabel {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-body);
+}
+
+.radiusVar {
+  font-size: var(--font-size-xs);
+  font-family: var(--font-mono);
+  color: var(--color-text-description);
+}
+
+/* ---------- Shadow ---------- */
+
+.shadowGrid {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.shadowItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.shadowPreview {
+  width: 6rem;
+  height: 6rem;
+  background-color: var(--color-surface);
+  border-radius: var(--radius-md);
+}
+
+.shadowLabel {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-body);
+}
+
+.shadowVar {
+  font-size: var(--font-size-xs);
+  font-family: var(--font-mono);
+  color: var(--color-text-description);
+}
