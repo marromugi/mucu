@@ -1,58 +1,43 @@
-import * as React from 'react';
-import { cn } from '@/lib/cn';
-import styles from './button.module.css';
+import { polymorphicComponent } from '@/lib/polymorphic'
+import { ButtonBase } from '../ButtonBase/ButtonBase'
+import { buttonVariants } from './const'
+import type { ButtonOwnProps } from './type'
 
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  /** Visual variant of the button */
-  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'destructive';
-  /** Size of the button */
-  size?: 'sm' | 'md' | 'lg';
-  /** Loading state */
-  loading?: boolean;
-}
-
-/**
- * Button component with multiple variants and sizes.
- *
- * @example
- * <Button variant="primary" size="md">
- *   Click me
- * </Button>
- */
-export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  (
-    {
-      className,
-      variant = 'primary',
-      size = 'md',
-      loading = false,
-      disabled,
-      children,
-      ...props
-    },
-    ref
-  ) => {
+const Button = polymorphicComponent<'button', ButtonOwnProps>(
+  ({
+    as,
+    children,
+    variant,
+    size,
+    fullWidth,
+    className,
+    disabled,
+    icon,
+    iconPosition,
+    ref,
+    ...props
+  }) => {
+    const Component = as || 'button'
     return (
-      <button
+      <Component
         ref={ref}
-        className={cn(
-          styles.button,
-          styles[variant],
-          styles[size],
-          loading && styles.loading,
-          className
-        )}
-        disabled={disabled || loading}
+        className={buttonVariants({ variant, className })}
+        disabled={disabled}
         {...props}
       >
-        {loading && <span className={styles.spinner} aria-hidden="true" />}
-        <span className={loading ? styles.hiddenText : undefined}>
+        <ButtonBase
+          variant={variant}
+          size={size}
+          fullWidth={fullWidth}
+          icon={icon}
+          iconPosition={iconPosition}
+        >
           {children}
-        </span>
-      </button>
-    );
-  }
-);
+        </ButtonBase>
+      </Component>
+    )
+  },
+)
+Button.displayName = 'Button'
 
-Button.displayName = 'Button';
+export { Button }

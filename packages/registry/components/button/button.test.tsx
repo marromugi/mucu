@@ -1,209 +1,104 @@
-import { describe, it, expect, vi } from 'vitest';
-import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import { Button } from './button';
+import { describe, it, expect } from 'vitest'
+import { render } from '@testing-library/react'
+import * as React from 'react'
+import { Button } from './Button'
+
+const MockIcon: React.ComponentType<React.SVGAttributes<SVGElement>> = (
+  props,
+) => (
+  <svg data-testid="mock-icon" {...props}>
+    <path d="M12 4v16m-8-8h16" />
+  </svg>
+)
 
 describe('Button', () => {
-  describe('rendering', () => {
-    it('should render with children', () => {
-      render(<Button>Click me</Button>);
+  it('renders as button by default', () => {
+    const { container } = render(<Button>hello</Button>)
+    expect(container.firstChild?.nodeName).toBe('BUTTON')
+  })
 
-      expect(
-        screen.getByRole('button', { name: 'Click me' })
-      ).toBeInTheDocument();
-    });
+  it('applies default variant focus ring classes', () => {
+    const { container } = render(<Button>hello</Button>)
+    const el = container.firstChild as HTMLElement
+    expect(el).toHaveClass('group')
+    expect(el).toHaveClass('rounded-full')
+  })
 
-    it('should render with default props', () => {
-      render(<Button>Default</Button>);
-      const button = screen.getByRole('button');
+  it('applies primary variant focus ring class', () => {
+    const { container } = render(<Button variant="primary">hello</Button>)
+    expect(container.firstChild).toHaveClass(
+      'focus-visible:ring-neutral-950',
+    )
+  })
 
-      expect(button).toHaveClass('button', 'primary', 'md');
-    });
+  it('applies secondary variant focus ring class', () => {
+    const { container } = render(<Button variant="secondary">hello</Button>)
+    expect(container.firstChild).toHaveClass(
+      'focus-visible:ring-neutral-400',
+    )
+  })
 
-    it('should forward ref to button element', () => {
-      const ref = { current: null } as React.RefObject<HTMLButtonElement>;
-      render(<Button ref={ref}>Ref Test</Button>);
+  it('applies alert variant focus ring class', () => {
+    const { container } = render(<Button variant="alert">hello</Button>)
+    expect(container.firstChild).toHaveClass('focus-visible:ring-red-600')
+  })
 
-      expect(ref.current).toBeInstanceOf(HTMLButtonElement);
-    });
+  it('sets disabled attribute', () => {
+    const { container } = render(<Button disabled>hello</Button>)
+    expect(container.firstChild).toHaveAttribute('disabled')
+  })
 
-    it('should apply custom className', () => {
-      render(<Button className="custom-class">Custom</Button>);
+  it('renders as different element with as prop', () => {
+    const { container } = render(<Button as="a">hello</Button>)
+    expect(container.firstChild?.nodeName).toBe('A')
+  })
 
-      expect(screen.getByRole('button')).toHaveClass('custom-class');
-    });
+  it('merges className', () => {
+    const { container } = render(
+      <Button className="custom-class">hello</Button>,
+    )
+    const el = container.firstChild as HTMLElement
+    expect(el).toHaveClass('group')
+    expect(el).toHaveClass('custom-class')
+  })
 
-    it('should pass through HTML button attributes', () => {
-      render(
-        <Button type="submit" name="submit-btn" data-testid="custom">
-          Submit
-        </Button>
-      );
+  it('forwards ref', () => {
+    const ref = React.createRef<HTMLButtonElement>()
+    render(<Button ref={ref}>hello</Button>)
+    expect(ref.current).toBeInstanceOf(HTMLButtonElement)
+  })
 
-      const button = screen.getByRole('button');
-      expect(button).toHaveAttribute('type', 'submit');
-      expect(button).toHaveAttribute('name', 'submit-btn');
-      expect(button).toHaveAttribute('data-testid', 'custom');
-    });
-  });
+  it('passes variant to ButtonBase', () => {
+    const { container } = render(
+      <Button variant="secondary">hello</Button>,
+    )
+    const inner = container.querySelector('span')
+    expect(inner).toHaveClass('bg-neutral-50')
+  })
 
-  describe('variants', () => {
-    it.each([
-      ['primary', 'primary'],
-      ['secondary', 'secondary'],
-      ['outline', 'outline'],
-      ['ghost', 'ghost'],
-      ['destructive', 'destructive'],
-    ] as const)('should render %s variant', (variant, expectedClass) => {
-      render(<Button variant={variant}>Button</Button>);
+  it('passes size to ButtonBase', () => {
+    const { container } = render(<Button size="sm">hello</Button>)
+    const inner = container.querySelector('span')
+    expect(inner).toHaveClass('h-8')
+  })
 
-      expect(screen.getByRole('button')).toHaveClass(expectedClass);
-    });
-  });
+  it('passes fullWidth to ButtonBase', () => {
+    const { container } = render(<Button fullWidth>hello</Button>)
+    const inner = container.querySelector('span')
+    expect(inner).toHaveClass('w-full')
+  })
 
-  describe('sizes', () => {
-    it.each([
-      ['sm', 'sm'],
-      ['md', 'md'],
-      ['lg', 'lg'],
-    ] as const)('should render %s size', (size, expectedClass) => {
-      render(<Button size={size}>Button</Button>);
+  it('passes icon to ButtonBase', () => {
+    const { container } = render(
+      <Button icon={MockIcon}>hello</Button>,
+    )
+    const icon = container.querySelector('[data-testid="mock-icon"]')
+    expect(icon).toBeTruthy()
+  })
 
-      expect(screen.getByRole('button')).toHaveClass(expectedClass);
-    });
-  });
-
-  describe('loading state', () => {
-    it('should show spinner when loading', () => {
-      render(<Button loading>Loading</Button>);
-
-      const spinner = document.querySelector('[aria-hidden="true"]');
-      expect(spinner).toBeInTheDocument();
-      expect(spinner).toHaveClass('spinner');
-    });
-
-    it('should disable button when loading', () => {
-      render(<Button loading>Loading</Button>);
-
-      expect(screen.getByRole('button')).toBeDisabled();
-    });
-
-    it('should hide text visually when loading', () => {
-      render(<Button loading>Loading Text</Button>);
-
-      const textSpan = screen.getByText('Loading Text');
-      expect(textSpan).toHaveClass('hiddenText');
-    });
-
-    it('should apply loading class to button', () => {
-      render(<Button loading>Loading</Button>);
-
-      expect(screen.getByRole('button')).toHaveClass('loading');
-    });
-
-    it('should not show spinner when not loading', () => {
-      render(<Button>Not Loading</Button>);
-
-      const spinner = document.querySelector('.spinner');
-      expect(spinner).not.toBeInTheDocument();
-    });
-  });
-
-  describe('disabled state', () => {
-    it('should be disabled when disabled prop is true', () => {
-      render(<Button disabled>Disabled</Button>);
-
-      expect(screen.getByRole('button')).toBeDisabled();
-    });
-
-    it('should not be disabled by default', () => {
-      render(<Button>Enabled</Button>);
-
-      expect(screen.getByRole('button')).not.toBeDisabled();
-    });
-
-    it('should be disabled when both disabled and loading', () => {
-      render(
-        <Button disabled loading>
-          Both
-        </Button>
-      );
-
-      expect(screen.getByRole('button')).toBeDisabled();
-    });
-  });
-
-  describe('interactions', () => {
-    it('should call onClick when clicked', async () => {
-      const user = userEvent.setup();
-      const handleClick = vi.fn();
-
-      render(<Button onClick={handleClick}>Click me</Button>);
-      await user.click(screen.getByRole('button'));
-
-      expect(handleClick).toHaveBeenCalledTimes(1);
-    });
-
-    it('should not call onClick when disabled', async () => {
-      const user = userEvent.setup();
-      const handleClick = vi.fn();
-
-      render(
-        <Button disabled onClick={handleClick}>
-          Disabled
-        </Button>
-      );
-      await user.click(screen.getByRole('button'));
-
-      expect(handleClick).not.toHaveBeenCalled();
-    });
-
-    it('should not call onClick when loading', async () => {
-      const user = userEvent.setup();
-      const handleClick = vi.fn();
-
-      render(
-        <Button loading onClick={handleClick}>
-          Loading
-        </Button>
-      );
-      await user.click(screen.getByRole('button'));
-
-      expect(handleClick).not.toHaveBeenCalled();
-    });
-
-    it('should be focusable', async () => {
-      const user = userEvent.setup();
-      render(<Button>Focus me</Button>);
-
-      await user.tab();
-
-      expect(screen.getByRole('button')).toHaveFocus();
-    });
-  });
-
-  describe('accessibility', () => {
-    it('should have accessible name from children', () => {
-      render(<Button>Accessible Button</Button>);
-
-      expect(
-        screen.getByRole('button', { name: 'Accessible Button' })
-      ).toBeInTheDocument();
-    });
-
-    it('should support aria-label', () => {
-      render(<Button aria-label="Close dialog">X</Button>);
-
-      expect(
-        screen.getByRole('button', { name: 'Close dialog' })
-      ).toBeInTheDocument();
-    });
-
-    it('should hide spinner from screen readers', () => {
-      render(<Button loading>Loading</Button>);
-
-      const spinner = document.querySelector('.spinner');
-      expect(spinner).toHaveAttribute('aria-hidden', 'true');
-    });
-  });
-});
+  it('renders children inside ButtonBase', () => {
+    const { getByText } = render(<Button>click me</Button>)
+    const text = getByText('click me')
+    expect(text.closest('span')).toBeTruthy()
+  })
+})
