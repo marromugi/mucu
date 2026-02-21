@@ -3,14 +3,51 @@
   "version": "0.1.0",
   "items": [
     {
-      "name": "button",
+      "name": "box",
       "type": "component",
-      "description": "A versatile button component with multiple variants",
-      "dependencies": [],
+      "description": "A polymorphic layout primitive with semantic background colors",
+      "dependencies": ["tailwind-variants"],
+      "registryDependencies": ["polymorphic"],
+      "files": [
+        { "path": "components/Box/Box.tsx", "type": "component" },
+        { "path": "components/Box/const.ts", "type": "component" },
+        { "path": "components/Box/type.ts", "type": "component" }
+      ]
+    },
+    {
+      "name": "spinner",
+      "type": "component",
+      "description": "An animated loading spinner with stroke-dash animation",
+      "dependencies": ["tailwind-variants"],
       "registryDependencies": [],
       "files": [
-        { "path": "components/button/button.tsx", "type": "component" },
-        { "path": "components/button/button.module.css", "type": "style" }
+        { "path": "components/Spinner/Spinner.tsx", "type": "component" },
+        { "path": "components/Spinner/const.ts", "type": "component" },
+        { "path": "components/Spinner/type.ts", "type": "component" }
+      ]
+    },
+    {
+      "name": "button-base",
+      "type": "component",
+      "description": "A polymorphic visual button primitive with variant, size, and icon support",
+      "dependencies": ["tailwind-variants"],
+      "registryDependencies": ["polymorphic"],
+      "files": [
+        { "path": "components/ButtonBase/ButtonBase.tsx", "type": "component" },
+        { "path": "components/ButtonBase/const.ts", "type": "component" },
+        { "path": "components/ButtonBase/type.ts", "type": "component" }
+      ]
+    },
+    {
+      "name": "button",
+      "type": "component",
+      "description": "A polymorphic interactive button with focus ring and variant styling",
+      "dependencies": ["tailwind-variants"],
+      "registryDependencies": ["polymorphic", "button-base"],
+      "files": [
+        { "path": "components/Button/Button.tsx", "type": "component" },
+        { "path": "components/Button/const.ts", "type": "component" },
+        { "path": "components/Button/type.ts", "type": "component" }
       ]
     }
   ],
@@ -18,23 +55,33 @@
     {
       "name": "cn",
       "type": "lib",
-      "description": "Utility for merging class names",
-      "dependencies": [],
+      "description": "Utility for merging Tailwind CSS class names",
+      "dependencies": ["clsx", "tailwind-merge"],
       "registryDependencies": [],
       "files": [
         { "path": "lib/cn.ts", "type": "lib" }
+      ]
+    },
+    {
+      "name": "polymorphic",
+      "type": "lib",
+      "description": "Utility for creating type-safe polymorphic components",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        { "path": "lib/polymorphic.ts", "type": "lib" }
       ]
     }
   ],
   "styles": [
     {
-      "name": "tokens",
+      "name": "globals",
       "type": "style",
-      "description": "CSS custom properties for theming",
-      "dependencies": [],
+      "description": "Tailwind CSS theme with design tokens and semantic colors",
+      "dependencies": ["tailwindcss"],
       "registryDependencies": [],
       "files": [
-        { "path": "styles/tokens.css", "type": "style" }
+        { "path": "styles/globals.css", "type": "style" }
       ]
     }
   ]

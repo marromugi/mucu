@@ -11,7 +11,12 @@
       "Bash(pnpm test:run:*)",
       "Bash(pnpm test:*)",
       "WebFetch(domain:www.npmjs.com)",
-      "WebFetch(domain:registry.npmjs.org)"
+      "WebFetch(domain:registry.npmjs.org)",
+      "Bash(pnpm format:check:*)",
+      "WebFetch(domain:storybook.js.org)",
+      "Bash(pnpm --filter registry vitest run:*)",
+      "Bash(npx tsc:*)",
+      "Bash(git add:*)"
     ],
     "deny": [
       "Bash(npm:*)",

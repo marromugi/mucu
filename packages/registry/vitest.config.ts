@@ -9,11 +9,6 @@ export default defineConfig({
     exclude: ['node_modules', '.storybook'],
     globals: true,
     setupFiles: ['./vitest.setup.ts'],
-    css: {
-      modules: {
-        classNameStrategy: 'non-scoped',
-      },
-    },
   },
   resolve: {
     alias: {
