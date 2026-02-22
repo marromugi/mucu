@@ -4,7 +4,7 @@ import { fileURLToPath } from 'url';
 import type { Registry, MucuConfig, RegistryFile } from '../types/index.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const REGISTRY_PATH = path.resolve(__dirname, '../../registry');
+const REGISTRY_PATH = path.join(__dirname, 'registry');
 
 export async function fetchRegistry(): Promise<Registry> {
   const content = await fs.readFile(
@@ -49,7 +49,8 @@ export async function copyComponentToProject(
   options: { overwrite?: boolean; cwd: string }
 ): Promise<void> {
   const registry = await fetchRegistry();
-  const item = registry.items.find(i => i.name === componentName);
+  const allItems = [...registry.items, ...registry.utilities, ...registry.styles];
+  const item = allItems.find(i => i.name === componentName);
 
   if (!item) {
     throw new Error(`Component "${componentName}" not found`);

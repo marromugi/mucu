@@ -15,4 +15,5 @@ export default defineConfig({
   define: {
     'process.env.PACKAGE_VERSION': JSON.stringify(pkg.version),
   },
+  onSuccess: 'tsx scripts/copy-registry.ts',
 });

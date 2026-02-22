@@ -12,7 +12,7 @@ export function resolveComponentDependencies(
   const visiting = new Set<string>();
 
   const itemMap = new Map<string, RegistryItem>();
-  for (const item of registry.items) {
+  for (const item of [...registry.items, ...registry.utilities, ...registry.styles]) {
     itemMap.set(item.name, item);
   }
 
