@@ -49,6 +49,101 @@
         { "path": "components/Button/const.ts", "type": "component" },
         { "path": "components/Button/type.ts", "type": "component" }
       ]
+    },
+    {
+      "name": "radio-group",
+      "type": "component",
+      "description": "A polymorphic compound radio group with context-driven items",
+      "dependencies": ["tailwind-variants"],
+      "registryDependencies": ["polymorphic"],
+      "files": [
+        { "path": "components/RadioGroup/RadioGroup.tsx", "type": "component" },
+        { "path": "components/RadioGroup/RadioGroupItem.tsx", "type": "component" },
+        { "path": "components/RadioGroup/const.ts", "type": "component" },
+        { "path": "components/RadioGroup/type.ts", "type": "component" },
+        { "path": "components/RadioGroup/context.ts", "type": "component" },
+        { "path": "components/RadioGroup/hooks/useRadioGroup/useRadioGroup.ts", "type": "component" },
+        { "path": "components/RadioGroup/hooks/useRadioGroup/type.ts", "type": "component" }
+      ]
+    },
+    {
+      "name": "tab",
+      "type": "component",
+      "description": "A polymorphic animated tab switcher with spring-animated pill indicator",
+      "dependencies": ["tailwind-variants", "motion"],
+      "registryDependencies": ["polymorphic", "cn"],
+      "files": [
+        { "path": "components/Tab/Tab.tsx", "type": "component" },
+        { "path": "components/Tab/const.ts", "type": "component" },
+        { "path": "components/Tab/type.ts", "type": "component" }
+      ]
+    },
+    {
+      "name": "tooltip",
+      "type": "component",
+      "description": "A polymorphic animated tooltip with configurable placement, alignment, and delay",
+      "dependencies": ["tailwind-variants", "motion"],
+      "registryDependencies": ["polymorphic"],
+      "files": [
+        { "path": "components/Tooltip/Tooltip.tsx", "type": "component" },
+        { "path": "components/Tooltip/const.ts", "type": "component" },
+        { "path": "components/Tooltip/type.ts", "type": "component" },
+        { "path": "components/Tooltip/utils.ts", "type": "component" },
+        { "path": "components/Tooltip/hooks/useTooltip/useTooltip.ts", "type": "component" },
+        { "path": "components/Tooltip/hooks/useTooltip/type.ts", "type": "component" }
+      ]
+    },
+    {
+      "name": "text-field",
+      "type": "component",
+      "description": "A text input field with size variants, error state, and accessibility support",
+      "dependencies": ["tailwind-variants"],
+      "registryDependencies": ["cn"],
+      "files": [
+        { "path": "components/TextField/TextField.tsx", "type": "component" },
+        { "path": "components/TextField/const.ts", "type": "component" },
+        { "path": "components/TextField/type.ts", "type": "component" }
+      ]
+    },
+    {
+      "name": "text-area",
+      "type": "component",
+      "description": "A multi-line text area with size variants, resize options, and error state",
+      "dependencies": ["tailwind-variants"],
+      "registryDependencies": ["cn"],
+      "files": [
+        { "path": "components/TextArea/TextArea.tsx", "type": "component" },
+        { "path": "components/TextArea/const.ts", "type": "component" },
+        { "path": "components/TextArea/type.ts", "type": "component" }
+      ]
+    },
+    {
+      "name": "popover",
+      "type": "component",
+      "description": "A polymorphic animated popover with configurable placement, alignment, and controlled/uncontrolled modes",
+      "dependencies": ["tailwind-variants", "motion"],
+      "registryDependencies": ["polymorphic"],
+      "files": [
+        { "path": "components/Popover/Popover.tsx", "type": "component" },
+        { "path": "components/Popover/const.ts", "type": "component" },
+        { "path": "components/Popover/type.ts", "type": "component" },
+        { "path": "components/Popover/utils.ts", "type": "component" },
+        { "path": "components/Popover/hooks/usePopover/usePopover.ts", "type": "component" },
+        { "path": "components/Popover/hooks/usePopover/type.ts", "type": "component" }
+      ]
+    },
+    {
+      "name": "calendar",
+      "type": "component",
+      "description": "A date picker calendar with locale support, markers, and controlled/uncontrolled modes",
+      "dependencies": ["tailwind-variants"],
+      "registryDependencies": ["cn"],
+      "files": [
+        { "path": "components/Calendar/Calendar.tsx", "type": "component" },
+        { "path": "components/Calendar/const.ts", "type": "component" },
+        { "path": "components/Calendar/type.ts", "type": "component" },
+        { "path": "components/Calendar/utils.ts", "type": "component" }
+      ]
     }
   ],
   "utilities": [
