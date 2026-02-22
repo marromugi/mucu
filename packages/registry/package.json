@@ -7,9 +7,17 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "test": "vitest",
+    "test:unit": "vitest --project=registry",
+    "test:storybook": "vitest --config vitest.config.storybook.ts",
     "test:run": "vitest run"
   },
+  "peerDependencies": {
+    "motion": ">=11.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
   "devDependencies": {
+    "motion": "^11.0.0",
     "@storybook/addon-docs": "10.2.10",
     "@storybook/addon-themes": "10.2.10",
     "@storybook/react-vite": "10.2.10",
@@ -30,7 +38,7 @@
     "tailwind-variants": "^3.2.2",
     "tailwindcss": "^4.2.0",
     "typescript": "^5.4.0",
-    "vite": "^5.4.0",
-    "vitest": "^3.0.0"
+    "vite": "^6.0.0",
+    "vitest": "^4.0.0"
   }
 }
