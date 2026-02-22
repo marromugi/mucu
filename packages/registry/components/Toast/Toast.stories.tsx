@@ -1,3 +1,4 @@
+import { expect, within, waitFor } from 'storybook/test'
 import { Button } from '../Button'
 import { ToastProvider } from './ToastProvider'
 import { useToast } from './hooks'
@@ -58,6 +59,57 @@ const ToastDemo = () => {
 
 export const Default: StoryObj = {
   render: () => <ToastDemo />,
+  play: async () => {
+    const body = within(document.body)
+    const successButton = body.getByText('Success')
+    successButton.click()
+
+    await waitFor(() => {
+      expect(body.getByRole('alert')).toBeInTheDocument()
+    })
+
+    await waitFor(() => {
+      expect(body.getByText('操作が成功しました')).toBeInTheDocument()
+    })
+  },
+}
+
+const CloseButtonDemo = () => {
+  const { addToast } = useToast()
+
+  return (
+    <Button
+      onClick={() =>
+        addToast({
+          title: '閉じるテスト',
+          duration: 0,
+          closable: true,
+        })
+      }
+    >
+      Show Toast
+    </Button>
+  )
+}
+
+export const CloseButton: StoryObj = {
+  render: () => <CloseButtonDemo />,
+  play: async () => {
+    const body = within(document.body)
+    const showButton = body.getByText('Show Toast')
+    showButton.click()
+
+    await waitFor(() => {
+      expect(body.getByRole('alert')).toBeInTheDocument()
+    })
+
+    const closeButton = body.getByLabelText('閉じる')
+    closeButton.click()
+
+    await waitFor(() => {
+      expect(body.queryByRole('alert')).not.toBeInTheDocument()
+    })
+  },
 }
 
 export const AllTypes: StoryObj = {
@@ -177,6 +229,19 @@ export const WithMessage: StoryObj = {
     }
 
     return <WithMessageInner />
+  },
+  play: async () => {
+    const body = within(document.body)
+    const button = body.getByText('成功（メッセージ付き）')
+    button.click()
+
+    await waitFor(() => {
+      expect(body.getByText('保存完了')).toBeInTheDocument()
+    })
+
+    await waitFor(() => {
+      expect(body.getByText('ファイルが正常に保存されました')).toBeInTheDocument()
+    })
   },
 }
 

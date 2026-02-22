@@ -1,11 +1,11 @@
 import { AnimatePresence } from 'motion/react'
 import { createPortal } from 'react-dom'
-import { toast as toastStyles } from './const'
+import { toastVariants } from './const'
 import { Toast } from './Toast'
 import type { ToastContainerProps } from './type'
 
 export const ToastContainer = ({ position, toasts, onClose, gap }: ToastContainerProps) => {
-  const styles = toastStyles({ position })
+  const styles = toastVariants({ position })
 
   if (typeof document === 'undefined') return null
 
@@ -25,3 +25,5 @@ export const ToastContainer = ({ position, toasts, onClose, gap }: ToastContaine
     document.body
   )
 }
+
+ToastContainer.displayName = 'ToastContainer'

@@ -1,4 +1,24 @@
-import type { ToastPosition } from './type'
+import type { ReactNode } from 'react'
+import { CheckCircleFill, ErrorFill, InfoFill, WarningFill } from './icons'
+import type { ToastPosition, ToastType } from './type'
+
+const iconClass = 'w-6 h-6 -ml-2'
+
+/** タイプに応じたアイコンを取得 */
+export const getIcon = (type: ToastType): ReactNode => {
+  switch (type) {
+    case 'success':
+      return <CheckCircleFill className={iconClass} />
+    case 'error':
+      return <ErrorFill className={iconClass} />
+    case 'warning':
+      return <WarningFill className={iconClass} />
+    case 'info':
+      return <InfoFill className={iconClass} />
+    default:
+      return null
+  }
+}
 
 /** 表示位置に応じたmotionアニメーションpropsを返す */
 export const getToastMotionProps = (position: ToastPosition) => {

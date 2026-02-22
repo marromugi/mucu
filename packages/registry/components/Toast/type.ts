@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 import type { VariantProps } from 'tailwind-variants'
-import type { toast } from './const'
+import type { toastVariants } from './const'
 
 /** Toastの種類 */
 export type ToastType = 'success' | 'error' | 'warning' | 'info' | 'default'
@@ -53,7 +53,7 @@ export interface ToastProviderProps {
 }
 
 /** ToastContainerのProps */
-export interface ToastContainerProps extends VariantProps<typeof toast> {
+export interface ToastContainerProps extends VariantProps<typeof toastVariants> {
   /** 表示位置 */
   position: ToastPosition
   /** Toast一覧 */
@@ -65,13 +65,15 @@ export interface ToastContainerProps extends VariantProps<typeof toast> {
 }
 
 /** 単一ToastのProps */
-export interface ToastProps extends VariantProps<typeof toast> {
+export interface ToastProps extends VariantProps<typeof toastVariants> {
   /** Toastデータ */
   data: ToastData
   /** 閉じる処理 */
   onClose: () => void
   /** 表示位置（アニメーション用） */
   position: ToastPosition
+  /** カスタムクラス名 */
+  className?: string
 }
 
 /** useToastの戻り値 */

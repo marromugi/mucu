@@ -1,6 +1,6 @@
 import { tv } from 'tailwind-variants'
 
-export const toast = tv({
+export const toastVariants = tv({
   slots: {
     container: ['fixed', 'z-[100]', 'flex', 'flex-col', 'pointer-events-none', 'p-4'],
     item: [
