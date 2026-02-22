@@ -29,6 +29,11 @@
     "typescript": "^5.4.0",
     "vitest": "^3.0.0"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/marromugi/mucu",
+    "directory": "packages/cli"
+  },
   "publishConfig": {
     "provenance": true,
     "access": "public"
