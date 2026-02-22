@@ -4,10 +4,12 @@ import type { MucuConfig } from '../types/index.js';
 vi.mock('prompts', () => ({ default: vi.fn() }));
 vi.mock('../utils/config.js');
 vi.mock('../utils/registry.js');
+vi.mock('../utils/tsconfig.js');
 
 import prompts from 'prompts';
 import { getDefaultConfig, writeConfig } from '../utils/config.js';
 import { copyUtilities, copyStyles } from '../utils/registry.js';
+import { detectAliasPrefix } from '../utils/tsconfig.js';
 import { init } from './init.js';
 
 const mockDefaultConfig: MucuConfig = {
@@ -29,6 +31,7 @@ describe('init command', () => {
   beforeEach(() => {
     vi.resetAllMocks();
     consoleSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
+    vi.mocked(detectAliasPrefix).mockResolvedValue(null);
     // Reset Commander state between tests
     init.setOptionValue('yes', undefined);
     init.setOptionValue('cwd', process.cwd());
@@ -43,7 +46,7 @@ describe('init command', () => {
   }
 
   it('should use default config with --yes flag', async () => {
-    vi.mocked(getDefaultConfig).mockReturnValue(mockDefaultConfig);
+    vi.mocked(getDefaultConfig).mockReturnValue({ ...mockDefaultConfig });
     vi.mocked(writeConfig).mockResolvedValue();
     vi.mocked(copyUtilities).mockResolvedValue();
     vi.mocked(copyStyles).mockResolvedValue();
@@ -56,20 +59,48 @@ describe('init command', () => {
     expect(copyStyles).toHaveBeenCalledWith(process.cwd(), mockDefaultConfig);
   });
 
-  it('should prompt for configuration when --yes is not set', async () => {
-    vi.mocked(prompts).mockResolvedValueOnce({
-      componentsDir: 'custom/components',
-      libDir: 'custom/lib',
-      stylesDir: 'custom/styles',
-      iconsDir: 'custom/icons',
-      typescript: false,
-    });
+  it('should use detected prefix with --yes flag', async () => {
+    vi.mocked(detectAliasPrefix).mockResolvedValue('~/');
+    vi.mocked(getDefaultConfig).mockReturnValue({ ...mockDefaultConfig });
+    vi.mocked(writeConfig).mockResolvedValue();
+    vi.mocked(copyUtilities).mockResolvedValue();
+    vi.mocked(copyStyles).mockResolvedValue();
+
+    await runInit('--yes');
+
+    expect(writeConfig).toHaveBeenCalledWith(
+      process.cwd(),
+      expect.objectContaining({
+        aliases: {
+          components: '~/components/ui',
+          lib: '~/lib',
+          icons: '~/components/icons',
+        },
+      })
+    );
+  });
+
+  it('should prompt for configuration and aliases when --yes is not set', async () => {
+    vi.mocked(prompts)
+      .mockResolvedValueOnce({
+        componentsDir: 'custom/components',
+        libDir: 'custom/lib',
+        stylesDir: 'custom/styles',
+        iconsDir: 'custom/icons',
+        typescript: false,
+      })
+      .mockResolvedValueOnce({
+        components: '@/components/ui',
+        lib: '@/lib',
+        icons: '@/components/icons',
+      });
     vi.mocked(writeConfig).mockResolvedValue();
     vi.mocked(copyUtilities).mockResolvedValue();
     vi.mocked(copyStyles).mockResolvedValue();
 
     await runInit();
 
+    expect(prompts).toHaveBeenCalledTimes(2);
     expect(prompts).toHaveBeenCalledWith(
       expect.arrayContaining([
         expect.objectContaining({ name: 'componentsDir' }),
@@ -77,6 +108,13 @@ describe('init command', () => {
         expect.objectContaining({ name: 'stylesDir' }),
         expect.objectContaining({ name: 'iconsDir' }),
         expect.objectContaining({ name: 'typescript' }),
+      ])
+    );
+    expect(prompts).toHaveBeenCalledWith(
+      expect.arrayContaining([
+        expect.objectContaining({ name: 'components' }),
+        expect.objectContaining({ name: 'lib' }),
+        expect.objectContaining({ name: 'icons' }),
       ])
     );
     expect(writeConfig).toHaveBeenCalledWith(process.cwd(), {
@@ -93,8 +131,48 @@ describe('init command', () => {
     });
   });
 
+  it('should use detected prefix as default in alias prompts', async () => {
+    vi.mocked(detectAliasPrefix).mockResolvedValue('~/');
+    vi.mocked(prompts)
+      .mockResolvedValueOnce({
+        componentsDir: 'src/components/ui',
+        libDir: 'src/lib',
+        stylesDir: 'src/styles',
+        iconsDir: 'src/components/icons',
+        typescript: true,
+      })
+      .mockResolvedValueOnce({
+        components: '~/components/ui',
+        lib: '~/lib',
+        icons: '~/components/icons',
+      });
+    vi.mocked(writeConfig).mockResolvedValue();
+    vi.mocked(copyUtilities).mockResolvedValue();
+    vi.mocked(copyStyles).mockResolvedValue();
+
+    await runInit();
+
+    expect(prompts).toHaveBeenCalledWith(
+      expect.arrayContaining([
+        expect.objectContaining({ name: 'components', initial: '~/components/ui' }),
+        expect.objectContaining({ name: 'lib', initial: '~/lib' }),
+        expect.objectContaining({ name: 'icons', initial: '~/components/icons' }),
+      ])
+    );
+    expect(writeConfig).toHaveBeenCalledWith(
+      process.cwd(),
+      expect.objectContaining({
+        aliases: {
+          components: '~/components/ui',
+          lib: '~/lib',
+          icons: '~/components/icons',
+        },
+      })
+    );
+  });
+
   it('should write config, copy utilities, and copy styles', async () => {
-    vi.mocked(getDefaultConfig).mockReturnValue(mockDefaultConfig);
+    vi.mocked(getDefaultConfig).mockReturnValue({ ...mockDefaultConfig });
     vi.mocked(writeConfig).mockResolvedValue();
     vi.mocked(copyUtilities).mockResolvedValue();
     vi.mocked(copyStyles).mockResolvedValue();
@@ -107,7 +185,7 @@ describe('init command', () => {
   });
 
   it('should log success messages', async () => {
-    vi.mocked(getDefaultConfig).mockReturnValue(mockDefaultConfig);
+    vi.mocked(getDefaultConfig).mockReturnValue({ ...mockDefaultConfig });
     vi.mocked(writeConfig).mockResolvedValue();
     vi.mocked(copyUtilities).mockResolvedValue();
     vi.mocked(copyStyles).mockResolvedValue();
@@ -132,13 +210,14 @@ describe('init command', () => {
   });
 
   it('should use custom cwd when provided', async () => {
-    vi.mocked(getDefaultConfig).mockReturnValue(mockDefaultConfig);
+    vi.mocked(getDefaultConfig).mockReturnValue({ ...mockDefaultConfig });
     vi.mocked(writeConfig).mockResolvedValue();
     vi.mocked(copyUtilities).mockResolvedValue();
     vi.mocked(copyStyles).mockResolvedValue();
 
     await runInit('--yes', '--cwd', '/custom/path');
 
+    expect(detectAliasPrefix).toHaveBeenCalledWith('/custom/path');
     expect(writeConfig).toHaveBeenCalledWith('/custom/path', mockDefaultConfig);
     expect(copyUtilities).toHaveBeenCalledWith(
       '/custom/path',
@@ -147,29 +226,55 @@ describe('init command', () => {
     expect(copyStyles).toHaveBeenCalledWith('/custom/path', mockDefaultConfig);
   });
 
-  it('should construct config with correct aliases from prompts', async () => {
-    vi.mocked(prompts).mockResolvedValueOnce({
-      componentsDir: 'app/ui',
-      libDir: 'app/utils',
-      stylesDir: 'app/css',
-      iconsDir: 'app/icons',
-      typescript: true,
-    });
+  it('should show detection message when prefix is found', async () => {
+    vi.mocked(detectAliasPrefix).mockResolvedValue('~/');
+    vi.mocked(prompts)
+      .mockResolvedValueOnce({
+        componentsDir: 'src/components/ui',
+        libDir: 'src/lib',
+        stylesDir: 'src/styles',
+        iconsDir: 'src/components/icons',
+        typescript: true,
+      })
+      .mockResolvedValueOnce({
+        components: '~/components/ui',
+        lib: '~/lib',
+        icons: '~/components/icons',
+      });
     vi.mocked(writeConfig).mockResolvedValue();
     vi.mocked(copyUtilities).mockResolvedValue();
     vi.mocked(copyStyles).mockResolvedValue();
 
     await runInit();
 
-    expect(writeConfig).toHaveBeenCalledWith(
-      process.cwd(),
-      expect.objectContaining({
-        aliases: {
-          components: '@/components/ui',
-          lib: '@/lib',
-          icons: '@/components/icons',
-        },
+    expect(consoleSpy).toHaveBeenCalledWith(
+      expect.stringContaining('Detected path alias prefix')
+    );
+  });
+
+  it('should show warning when no prefix is detected', async () => {
+    vi.mocked(detectAliasPrefix).mockResolvedValue(null);
+    vi.mocked(prompts)
+      .mockResolvedValueOnce({
+        componentsDir: 'src/components/ui',
+        libDir: 'src/lib',
+        stylesDir: 'src/styles',
+        iconsDir: 'src/components/icons',
+        typescript: true,
       })
+      .mockResolvedValueOnce({
+        components: '@/components/ui',
+        lib: '@/lib',
+        icons: '@/components/icons',
+      });
+    vi.mocked(writeConfig).mockResolvedValue();
+    vi.mocked(copyUtilities).mockResolvedValue();
+    vi.mocked(copyStyles).mockResolvedValue();
+
+    await runInit();
+
+    expect(consoleSpy).toHaveBeenCalledWith(
+      expect.stringContaining('No path aliases detected')
     );
   });
 });

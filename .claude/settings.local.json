@@ -26,7 +26,10 @@
       "Bash(pnpm test:unit:*)",
       "Bash(npx vitest:*)",
       "mcp__ide__getDiagnostics",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(pnpm --filter mucu test:run)",
+      "Bash(pnpm --filter mucu test:integration:*)",
+      "Bash(npx tsup:*)"
     ],
     "deny": [
       "Bash(npm:*)",

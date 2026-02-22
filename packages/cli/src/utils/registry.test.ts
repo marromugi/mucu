@@ -7,10 +7,12 @@ function createConfig(overrides: Partial<MucuConfig> = {}): MucuConfig {
     componentsDir: 'src/components/ui',
     libDir: 'src/lib',
     stylesDir: 'src/styles',
+    iconsDir: 'src/components/icons',
     typescript: true,
     aliases: {
       components: '@/components/ui',
       lib: '@/lib',
+      icons: '@/components/icons',
     },
     ...overrides,
   };

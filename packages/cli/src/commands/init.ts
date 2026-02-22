@@ -3,6 +3,7 @@ import prompts from 'prompts';
 import pc from 'picocolors';
 import { getDefaultConfig, writeConfig } from '../utils/config.js';
 import { copyUtilities, copyStyles } from '../utils/registry.js';
+import { detectAliasPrefix } from '../utils/tsconfig.js';
 import type { MucuConfig } from '../types/index.js';
 
 export const init = new Command()
@@ -15,8 +16,17 @@ export const init = new Command()
 
     let config: MucuConfig;
 
+    const detectedPrefix = await detectAliasPrefix(options.cwd);
+
     if (options.yes) {
       config = getDefaultConfig();
+      if (detectedPrefix) {
+        config.aliases = {
+          components: `${detectedPrefix}components/ui`,
+          lib: `${detectedPrefix}lib`,
+          icons: `${detectedPrefix}components/icons`,
+        };
+      }
     } else {
       const response = await prompts([
         {
@@ -51,6 +61,36 @@ export const init = new Command()
         }
       ]);
 
+      const prefix = detectedPrefix ?? '@/';
+
+      if (detectedPrefix) {
+        console.log(pc.cyan(`\n  Detected path alias prefix: ${pc.bold(detectedPrefix)}`));
+      } else {
+        console.log(pc.yellow('\n  No path aliases detected in tsconfig.json'));
+        console.log(pc.dim('  Using @/ as default prefix. You can change this in mucu.config.json.\n'));
+      }
+
+      const aliasResponse = await prompts([
+        {
+          type: 'text',
+          name: 'components',
+          message: 'Import alias for components',
+          initial: `${prefix}components/ui`
+        },
+        {
+          type: 'text',
+          name: 'lib',
+          message: 'Import alias for utilities',
+          initial: `${prefix}lib`
+        },
+        {
+          type: 'text',
+          name: 'icons',
+          message: 'Import alias for icons',
+          initial: `${prefix}components/icons`
+        }
+      ]);
+
       config = {
         componentsDir: response.componentsDir,
         libDir: response.libDir,
@@ -58,9 +98,9 @@ export const init = new Command()
         iconsDir: response.iconsDir,
         typescript: response.typescript,
         aliases: {
-          components: '@/components/ui',
-          lib: '@/lib',
-          icons: '@/components/icons'
+          components: aliasResponse.components,
+          lib: aliasResponse.lib,
+          icons: aliasResponse.icons
         }
       };
     }
