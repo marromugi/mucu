@@ -13,3 +13,5 @@ export type ImageOwnProps = Omit<
   /** 読み込みエラー時に表示するフォールバック要素 */
   fallback?: ReactNode
 } & Omit<ImgHTMLAttributes<HTMLImageElement>, 'alt'>
+
+export type ImageProps = ImageOwnProps

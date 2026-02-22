@@ -1,5 +1,6 @@
 import type * as React from 'react'
 import type { VariantProps } from 'tailwind-variants'
+import type { PolymorphicProps } from '@/lib/polymorphic'
 import type { buttonBaseVariants } from './const'
 
 type IconComponent = React.ComponentType<React.SVGAttributes<SVGElement>>
@@ -17,4 +18,6 @@ type ButtonBaseOwnProps = VariantProps<typeof buttonBaseVariants> & {
   iconPosition?: 'left' | 'right'
 }
 
-export type { ButtonBaseOwnProps, IconComponent }
+type ButtonBaseProps<E extends React.ElementType = 'span'> = PolymorphicProps<E, ButtonBaseOwnProps>
+
+export type { ButtonBaseOwnProps, ButtonBaseProps, IconComponent }

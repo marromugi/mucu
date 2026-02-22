@@ -1,2 +1,2 @@
 export { Image } from './Image'
-export type { ImageOwnProps } from './type'
+export type { ImageOwnProps, ImageProps } from './type'

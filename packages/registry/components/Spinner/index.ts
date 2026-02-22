@@ -1,2 +1,2 @@
 export { Spinner } from './Spinner'
-export type { SpinnerOwnProps } from './type'
+export type { SpinnerOwnProps, SpinnerProps } from './type'
