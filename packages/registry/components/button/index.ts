@@ -1,2 +1,2 @@
 export { Button } from './Button'
-export type { ButtonOwnProps } from './type'
+export type { ButtonOwnProps, ButtonProps } from './type'

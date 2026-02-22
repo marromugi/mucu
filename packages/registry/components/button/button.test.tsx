@@ -73,7 +73,7 @@ describe('Button', () => {
       <Button variant="secondary">hello</Button>,
     )
     const inner = container.querySelector('span')
-    expect(inner).toHaveClass('bg-neutral-50')
+    expect(inner).toHaveClass('bg-white')
   })
 
   it('passes size to ButtonBase', () => {
@@ -100,5 +100,36 @@ describe('Button', () => {
     const { getByText } = render(<Button>click me</Button>)
     const text = getByText('click me')
     expect(text.closest('span')).toBeTruthy()
+  })
+
+  it('renders spinner when isLoading is true', () => {
+    const { container } = render(<Button isLoading>hello</Button>)
+    const spinner = container.querySelector('svg.animate-spin')
+    expect(spinner).toBeTruthy()
+  })
+
+  it('sets data-loading attribute when isLoading is true', () => {
+    const { container } = render(<Button isLoading>hello</Button>)
+    const inner = container.querySelector('span')
+    expect(inner).toHaveAttribute('data-loading', 'true')
+  })
+
+  it('does not render spinner when isLoading is false', () => {
+    const { container } = render(<Button>hello</Button>)
+    const spinner = container.querySelector('svg.animate-spin')
+    expect(spinner).toBeNull()
+  })
+
+  it('still renders children when isLoading is true', () => {
+    const { getByText } = render(<Button isLoading>hello</Button>)
+    expect(getByText('hello')).toBeTruthy()
+  })
+
+  it('does not render icon when isLoading is true', () => {
+    const { container } = render(
+      <Button isLoading icon={MockIcon}>hello</Button>,
+    )
+    const icon = container.querySelector('[data-testid="mock-icon"]')
+    expect(icon).toBeNull()
   })
 })

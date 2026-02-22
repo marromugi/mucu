@@ -14,6 +14,7 @@ const Button = polymorphicComponent<'button', ButtonOwnProps>(
     disabled,
     icon,
     iconPosition,
+    isLoading,
     ref,
     ...props
   }) => {
@@ -31,6 +32,7 @@ const Button = polymorphicComponent<'button', ButtonOwnProps>(
           fullWidth={fullWidth}
           icon={icon}
           iconPosition={iconPosition}
+          isLoading={isLoading}
         >
           {children}
         </ButtonBase>

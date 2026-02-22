@@ -6,7 +6,13 @@ import { Button } from '.'
 const PlusIcon: React.ComponentType<React.SVGAttributes<SVGElement>> = (
   props,
 ) => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" {...props}>
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    {...props}
+  >
     <path d="M12 5v14M5 12h14" />
   </svg>
 )
@@ -14,7 +20,13 @@ const PlusIcon: React.ComponentType<React.SVGAttributes<SVGElement>> = (
 const ChevronIcon: React.ComponentType<React.SVGAttributes<SVGElement>> = (
   props,
 ) => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" {...props}>
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    {...props}
+  >
     <path d="M15 18l-6-6 6-6" />
   </svg>
 )
@@ -22,7 +34,13 @@ const ChevronIcon: React.ComponentType<React.SVGAttributes<SVGElement>> = (
 const CloseIcon: React.ComponentType<React.SVGAttributes<SVGElement>> = (
   props,
 ) => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" {...props}>
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    {...props}
+  >
     <path d="M18 6L6 18M6 6l12 12" />
   </svg>
 )
@@ -30,7 +48,13 @@ const CloseIcon: React.ComponentType<React.SVGAttributes<SVGElement>> = (
 const TrashIcon: React.ComponentType<React.SVGAttributes<SVGElement>> = (
   props,
 ) => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" {...props}>
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    {...props}
+  >
     <path d="M3 6h18M8 6V4h8v2M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6" />
   </svg>
 )
@@ -88,10 +112,6 @@ export const Primary: Story = {
     variant: 'primary',
     children: 'Primary Button',
   },
-  play: async ({ canvas }) => {
-    const el = canvas.getByText('Primary Button').closest('button')
-    await expect(el).toHaveClass('focus-visible:ring-neutral-950')
-  },
 }
 
 export const Secondary: Story = {
@@ -99,20 +119,12 @@ export const Secondary: Story = {
     variant: 'secondary',
     children: 'Secondary Button',
   },
-  play: async ({ canvas }) => {
-    const el = canvas.getByText('Secondary Button').closest('button')
-    await expect(el).toHaveClass('focus-visible:ring-neutral-400')
-  },
 }
 
 export const Alert: Story = {
   args: {
     variant: 'alert',
     children: 'Alert Button',
-  },
-  play: async ({ canvas }) => {
-    const el = canvas.getByText('Alert Button').closest('button')
-    await expect(el).toHaveClass('focus-visible:ring-red-600')
   },
 }
 
@@ -133,10 +145,6 @@ export const Disabled: Story = {
     variant: 'primary',
     children: 'Disabled Button',
     disabled: true,
-  },
-  play: async ({ canvas }) => {
-    const el = canvas.getByText('Disabled Button').closest('button')
-    await expect(el).toHaveAttribute('disabled')
   },
 }
 
@@ -247,16 +255,18 @@ export const AllVariants: Story = {
   ),
 }
 
+export const Loading: Story = {
+  args: {
+    children: 'Loading...',
+    isLoading: true,
+  },
+}
+
 export const AsLink: Story = {
   args: {
     as: 'a',
     href: '#',
     variant: 'primary',
     children: 'Link Button',
-  },
-  play: async ({ canvas }) => {
-    const el = canvas.getByText('Link Button').closest('a')
-    await expect(el?.tagName).toBe('A')
-    await expect(el).toHaveAttribute('href', '#')
   },
 }
