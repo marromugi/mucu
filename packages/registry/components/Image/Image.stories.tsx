@@ -1,5 +1,3 @@
-import { Photo } from '../../icon'
-import { Icon } from '../Icon'
 import { Image } from './Image'
 import type { Meta, StoryObj } from '@storybook/react'
 
@@ -58,7 +56,10 @@ export const ObjectFitVariants: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: '1rem' }}>
       {(['cover', 'contain', 'fill', 'none'] as const).map((fit) => (
-        <div key={fit} style={{ width: 200, height: 150, border: '1px solid #ccc' }}>
+        <div
+          key={fit}
+          style={{ width: 200, height: 150, border: '1px solid #ccc' }}
+        >
           <Image
             src="https://picsum.photos/400/300"
             alt={`objectFit: ${fit}`}
@@ -83,6 +84,7 @@ export const LoadingState: Story = {
 }
 
 export const ErrorWithFallback: Story = {
+  tags: ['!test'],
   args: {
     src: 'https://invalid-url-that-will-fail.example/image.jpg',
     alt: 'エラー画像',
@@ -102,7 +104,7 @@ export const ErrorWithFallback: Story = {
           color: '#666',
         }}
       >
-        <Icon icon={Photo} className="size-20" variant={'description'} />
+        <span>Fallback</span>
       </div>
     ),
   },

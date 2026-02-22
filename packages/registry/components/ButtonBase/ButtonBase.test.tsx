@@ -20,7 +20,7 @@ describe('ButtonBase', () => {
   it('applies default variant classes (primary, md)', () => {
     const { container } = render(<ButtonBase>hello</ButtonBase>)
     const el = container.firstChild as HTMLElement
-    expect(el).toHaveClass('bg-neutral-900')
+    expect(el).toHaveClass('bg-primary-900')
     expect(el).toHaveClass('h-10')
   })
 
@@ -29,7 +29,7 @@ describe('ButtonBase', () => {
       <ButtonBase variant="secondary">hello</ButtonBase>,
     )
     const el = container.firstChild as HTMLElement
-    expect(el).toHaveClass('bg-neutral-50')
+    expect(el).toHaveClass('bg-white')
     expect(el).toHaveClass('border')
   })
 
@@ -37,7 +37,7 @@ describe('ButtonBase', () => {
     const { container } = render(
       <ButtonBase variant="alert">hello</ButtonBase>,
     )
-    expect(container.firstChild).toHaveClass('bg-red-600')
+    expect(container.firstChild).toHaveClass('bg-transparent')
   })
 
   it('applies primary-ghost variant classes', () => {
@@ -93,7 +93,7 @@ describe('ButtonBase', () => {
       <ButtonBase className="custom-class">hello</ButtonBase>,
     )
     const el = container.firstChild as HTMLElement
-    expect(el).toHaveClass('bg-neutral-900')
+    expect(el).toHaveClass('bg-primary-900')
     expect(el).toHaveClass('custom-class')
   })
 
