@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { getMotionProps } from '../utils'
+import { getMotionProps } from './utils'
 
 describe('getMotionProps', () => {
   it('placement=top: 下方向にオフセット', () => {

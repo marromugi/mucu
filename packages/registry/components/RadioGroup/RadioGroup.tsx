@@ -1,35 +1,32 @@
-import { forwardRef } from 'react'
-import { cn } from '../../../lib/utils'
-import { radioGroup } from './const'
+import { polymorphicComponent } from '@/lib/polymorphic'
+import { radioGroupVariants } from './const'
 import { RadioGroupContext } from './context'
 import { useRadioGroup } from './hooks/useRadioGroup/useRadioGroup'
-import type { RadioGroupProps } from './type'
+import type { RadioGroupOwnProps } from './type'
 
-export const RadioGroup = forwardRef<HTMLDivElement, RadioGroupProps>(
-  (
-    {
-      children,
-      value,
-      defaultValue,
-      onValueChange,
-      disabled = false,
-      size = 'md',
-      orientation = 'vertical',
-      name,
-      required = false,
-      className,
-      ...props
-    },
-    ref
-  ) => {
+const RadioGroup = polymorphicComponent<'div', RadioGroupOwnProps>(
+  ({
+    as,
+    children,
+    value,
+    defaultValue,
+    onValueChange,
+    disabled = false,
+    size = 'md',
+    orientation = 'vertical',
+    name,
+    required = false,
+    className,
+    ref,
+    ...props
+  }) => {
+    const Component = as || 'div'
     const { currentValue, setValue, groupId } = useRadioGroup({
       value,
       defaultValue,
       onValueChange,
       disabled,
     })
-
-    const styles = radioGroup({ orientation, disabled })
 
     return (
       <RadioGroupContext.Provider
@@ -42,20 +39,21 @@ export const RadioGroup = forwardRef<HTMLDivElement, RadioGroupProps>(
           required,
         }}
       >
-        <div
+        <Component
           ref={ref}
           role="radiogroup"
           aria-orientation={orientation}
           aria-disabled={disabled || undefined}
           aria-required={required || undefined}
-          className={cn(styles, className)}
+          className={radioGroupVariants({ orientation, disabled, className })}
           {...props}
         >
           {children}
-        </div>
+        </Component>
       </RadioGroupContext.Provider>
     )
-  }
+  },
 )
-
 RadioGroup.displayName = 'RadioGroup'
+
+export { RadioGroup }

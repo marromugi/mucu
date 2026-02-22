@@ -1,6 +1,6 @@
 import { tv } from 'tailwind-variants'
 
-export const radioGroup = tv({
+export const radioGroupVariants = tv({
   base: ['flex'],
   variants: {
     orientation: {
@@ -17,7 +17,7 @@ export const radioGroup = tv({
   },
 })
 
-export const radioGroupItem = tv({
+export const radioGroupItemVariants = tv({
   slots: {
     wrapper: ['group', 'inline-flex', 'items-center', 'cursor-pointer', 'select-none'],
     indicator: [
@@ -27,18 +27,12 @@ export const radioGroupItem = tv({
       'border-2',
       'transition-[border-color]',
       'duration-200',
-      // ライトモード
-      'border-neutral-300',
-      'bg-white',
-      // ダークモード
-      'dark:border-neutral-600',
-      'dark:bg-neutral-800',
+      'border-outline',
+      'bg-surface',
       // フォーカス時
       'group-focus-within:ring-2',
-      'group-focus-within:ring-neutral-900/20',
+      'group-focus-within:ring-focus/20',
       'group-focus-within:ring-offset-2',
-      'dark:group-focus-within:ring-neutral-100/20',
-      'dark:group-focus-within:ring-offset-neutral-900',
     ],
     dot: [
       'absolute',
@@ -47,20 +41,14 @@ export const radioGroupItem = tv({
       'rounded-full',
       'transition-transform',
       'duration-200',
-      // ライトモード
-      'bg-neutral-900',
-      // ダークモード
-      'dark:bg-neutral-100',
+      'bg-text-primary',
       // 初期状態（非選択時）
       'scale-0',
     ],
     label: [
       'transition-colors',
       'duration-200',
-      // ライトモード
-      'text-neutral-700',
-      // ダークモード
-      'dark:text-neutral-200',
+      'text-text-body',
     ],
     input: ['sr-only'],
   },
@@ -81,7 +69,7 @@ export const radioGroupItem = tv({
     },
     checked: {
       true: {
-        indicator: ['border-neutral-900', 'dark:border-neutral-100'],
+        indicator: ['border-text-primary'],
         dot: ['scale-100'],
       },
     },
@@ -99,7 +87,7 @@ export const radioGroupItem = tv({
       checked: false,
       disabled: false,
       className: {
-        indicator: ['group-hover:border-neutral-400', 'dark:group-hover:border-neutral-500'],
+        indicator: ['group-hover:border-text-description'],
       },
     },
     // checked + disabled の組み合わせ
@@ -107,8 +95,8 @@ export const radioGroupItem = tv({
       checked: true,
       disabled: true,
       className: {
-        indicator: ['border-neutral-400', 'dark:border-neutral-600'],
-        dot: ['bg-neutral-400', 'dark:bg-neutral-600'],
+        indicator: ['border-disabled-text'],
+        dot: ['bg-disabled-text'],
       },
     },
   ],

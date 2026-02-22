@@ -1,6 +1,6 @@
 import { tv } from 'tailwind-variants'
 
-export const tooltip = tv({
+export const tooltipVariants = tv({
   slots: {
     wrapper: ['relative', 'inline-flex'],
     content: [
@@ -13,13 +13,11 @@ export const tooltip = tv({
       'font-medium',
       'whitespace-nowrap',
       'pointer-events-none',
-      'bg-neutral-900',
-      'text-neutral-50',
-      'dark:bg-neutral-50',
-      'dark:text-neutral-900',
+      'bg-text-primary',
+      'text-surface',
       'shadow-md',
     ],
-    arrow: ['absolute', 'w-2', 'h-2', 'rotate-45', 'bg-neutral-900', 'dark:bg-neutral-50'],
+    arrow: ['absolute', 'w-2', 'h-2', 'rotate-45', 'bg-text-primary'],
   },
   variants: {
     placement: {

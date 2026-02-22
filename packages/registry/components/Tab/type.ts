@@ -1,6 +1,7 @@
-import type { tab } from './const'
-import type { HTMLAttributes, ReactNode } from 'react'
+import type { tabVariants } from './const'
+import type { ReactNode } from 'react'
 import type { VariantProps } from 'tailwind-variants'
+import type { PolymorphicProps } from '@/lib/polymorphic'
 
 /** 個々のタブアイテム */
 export interface TabItem {
@@ -10,8 +11,7 @@ export interface TabItem {
   label: ReactNode
 }
 
-export interface TabProps
-  extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'>, VariantProps<typeof tab> {
+export type TabOwnProps = VariantProps<typeof tabVariants> & {
   /** タブアイテムの配列 */
   items: TabItem[]
   /** 現在選択されているタブの value */
@@ -20,6 +20,6 @@ export interface TabProps
   onChange: (value: string) => void
   /** 各タブの最小幅（px） */
   minWidth?: number
-  /** カスタムクラス（ルート要素に適用） */
-  className?: string
 }
+
+export type TabProps<E extends React.ElementType = 'div'> = PolymorphicProps<E, TabOwnProps>

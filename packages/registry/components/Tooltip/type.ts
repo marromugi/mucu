@@ -1,6 +1,7 @@
-import type { tooltip } from './const'
-import type { HTMLAttributes, ReactNode } from 'react'
+import type { tooltipVariants } from './const'
+import type { ReactNode } from 'react'
 import type { VariantProps } from 'tailwind-variants'
+import type { PolymorphicProps } from '@/lib/polymorphic'
 
 /** ツールチップの表示位置 */
 export type TooltipPlacement = 'top' | 'bottom' | 'left' | 'right'
@@ -8,8 +9,7 @@ export type TooltipPlacement = 'top' | 'bottom' | 'left' | 'right'
 /** ツールチップの揃え位置 */
 export type TooltipAlign = 'start' | 'center' | 'end'
 
-export interface TooltipProps
-  extends Omit<HTMLAttributes<HTMLDivElement>, 'content'>, VariantProps<typeof tooltip> {
+export type TooltipOwnProps = VariantProps<typeof tooltipVariants> & {
   /** ツールチップの内容 */
   content: ReactNode
   /** 表示位置 @default 'top' */
@@ -24,8 +24,8 @@ export interface TooltipProps
   offset?: number
   /** ツールチップを無効にするか @default false */
   disabled?: boolean
-  /** カスタムクラス（ツールチップ本体に適用） */
-  className?: string
   /** トリガー要素 */
   children: ReactNode
 }
+
+export type TooltipProps<E extends React.ElementType = 'div'> = PolymorphicProps<E, TooltipOwnProps>

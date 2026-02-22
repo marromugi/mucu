@@ -1,6 +1,7 @@
-import type { radioGroup, radioGroupItem } from './const'
-import type { HTMLAttributes, ReactNode } from 'react'
+import type { radioGroupVariants, radioGroupItemVariants } from './const'
+import type { ReactNode } from 'react'
 import type { VariantProps } from 'tailwind-variants'
+import type { PolymorphicProps } from '@/lib/polymorphic'
 
 /** RadioGroup のサイズ */
 export type RadioGroupSize = 'sm' | 'md'
@@ -8,10 +9,7 @@ export type RadioGroupSize = 'sm' | 'md'
 /** RadioGroup の方向 */
 export type RadioGroupOrientation = 'horizontal' | 'vertical'
 
-export interface RadioGroupProps
-  extends
-    Omit<HTMLAttributes<HTMLDivElement>, 'onChange' | 'defaultValue'>,
-    VariantProps<typeof radioGroup> {
+export type RadioGroupOwnProps = VariantProps<typeof radioGroupVariants> & {
   /** ラジオグループの内容（RadioGroupItem を受け取る） */
   children: ReactNode
   /** 選択されている値（制御モード） */
@@ -30,21 +28,20 @@ export interface RadioGroupProps
   name?: string
   /** 必須フィールドか @default false */
   required?: boolean
-  /** カスタムクラス */
-  className?: string
 }
 
-export interface RadioGroupItemProps
-  extends Omit<HTMLAttributes<HTMLLabelElement>, 'onChange'>, VariantProps<typeof radioGroupItem> {
+export type RadioGroupItemOwnProps = VariantProps<typeof radioGroupItemVariants> & {
   /** ラジオボタンの値（必須） */
   value: string
   /** ラベル（オプション） */
   children?: ReactNode
   /** 個別に無効にする @default false */
   disabled?: boolean
-  /** カスタムクラス */
-  className?: string
 }
+
+export type RadioGroupProps<E extends React.ElementType = 'div'> = PolymorphicProps<E, RadioGroupOwnProps>
+
+export type RadioGroupItemProps<E extends React.ElementType = 'label'> = PolymorphicProps<E, RadioGroupItemOwnProps>
 
 export interface RadioGroupContextValue {
   /** 現在選択されている値 */

@@ -1,8 +1,8 @@
 import { tv } from 'tailwind-variants'
 
-export const tab = tv({
+export const tabVariants = tv({
   slots: {
-    root: ['relative', 'inline-flex', 'items-center', 'bg-neutral-200', 'dark:bg-neutral-900'],
+    root: ['relative', 'inline-flex', 'items-center', 'bg-container'],
     trigger: [
       'relative',
       'z-10',
@@ -14,17 +14,15 @@ export const tab = tv({
       'font-medium',
       'transition-colors',
       'duration-200',
-      'text-neutral-500',
-      'dark:text-neutral-400',
-      'hover:text-neutral-900',
-      'dark:hover:text-neutral-50',
+      'text-text-description',
+      'hover:text-text-body',
       'focus-visible:outline-none',
       'focus-visible:ring-2',
-      'focus-visible:ring-neutral-400',
+      'focus-visible:ring-focus',
       'focus-visible:ring-offset-1',
     ],
-    triggerActive: ['text-neutral-900', 'dark:text-neutral-50'],
-    pill: ['absolute', 'bg-white', 'dark:bg-neutral-700', 'shadow-sm'],
+    triggerActive: ['text-text-body'],
+    pill: ['absolute', 'bg-surface', 'shadow-sm'],
   },
   variants: {
     size: {

@@ -1,11 +1,12 @@
-import { forwardRef, useContext, useId } from 'react'
-import { cn } from '../../../lib/utils'
-import { radioGroupItem } from './const'
+import { useContext, useId } from 'react'
+import { polymorphicComponent } from '@/lib/polymorphic'
+import { radioGroupItemVariants } from './const'
 import { RadioGroupContext } from './context'
-import type { RadioGroupItemProps } from './type'
+import type { RadioGroupItemOwnProps } from './type'
 
-export const RadioGroupItem = forwardRef<HTMLLabelElement, RadioGroupItemProps>(
-  ({ value, children, disabled = false, className, ...props }, ref) => {
+const RadioGroupItem = polymorphicComponent<'label', RadioGroupItemOwnProps>(
+  ({ as, value, children, disabled = false, className, ref, ...props }) => {
+    const Component = as || 'label'
     const context = useContext(RadioGroupContext)
     const itemId = useId()
 
@@ -16,7 +17,7 @@ export const RadioGroupItem = forwardRef<HTMLLabelElement, RadioGroupItemProps>(
     const isDisabled = disabled || context.disabled
     const isChecked = context.value === value
 
-    const styles = radioGroupItem({
+    const styles = radioGroupItemVariants({
       size: context.size,
       checked: isChecked,
       disabled: isDisabled,
@@ -28,7 +29,7 @@ export const RadioGroupItem = forwardRef<HTMLLabelElement, RadioGroupItemProps>(
     }
 
     return (
-      <label ref={ref} className={cn(styles.wrapper(), className)} {...props}>
+      <Component ref={ref} className={styles.wrapper({ className })} {...props}>
         <input
           type="radio"
           id={itemId}
@@ -45,9 +46,10 @@ export const RadioGroupItem = forwardRef<HTMLLabelElement, RadioGroupItemProps>(
           <span className={styles.dot()} />
         </span>
         {children && <span className={styles.label()}>{children}</span>}
-      </label>
+      </Component>
     )
-  }
+  },
 )
-
 RadioGroupItem.displayName = 'RadioGroupItem'
+
+export { RadioGroupItem }
