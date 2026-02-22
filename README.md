@@ -1,61 +1,74 @@
 # Mucu
 
-A shadcn/ui-style React component library and CLI tool. Copy and paste beautiful, accessible components into your project.
+[English](./README.md) | [日本語](./README-jp.md)
+
+Copy-paste React components styled with Tailwind CSS. Own your UI code.
 
 ## Features
 
-- **CLI Tool** - Add components to your project with a single command
-- **CSS Modules** - Scoped styling without CSS-in-JS runtime overhead
-- **Design Tokens** - Customizable theming with CSS custom properties (light/dark mode support)
-- **TypeScript** - Full type safety out of the box
-- **Icon Generation** - Convert SVG files into optimized React icon components
+- **Copy-paste** - Components live in your project, not `node_modules`
+- **Tailwind CSS 4** - Styled with `tailwind-variants` and CSS custom properties
+- **TypeScript** - Full type safety with polymorphic `as` prop
+- **Dark mode** - Design tokens with `data-theme` attribute
+- **Animations** - Built with `motion/react`
+- **Icon generation** - Convert SVGs to React components via CLI
 
 ## Installation
 
 ```bash
-npm install -g mucu
-# or
 pnpm add -g mucu
 ```
 
 ## Quick Start
 
-### Initialize Mucu in Your Project
-
 ```bash
+# Initialize in your project
 mucu init
-```
 
-This creates a `mucu.config.json` and sets up the required directories and utilities.
-
-### Add Components
-
-```bash
-# Interactive selection
-mucu add
-
-# Add specific components
+# Add a component
 mucu add button
 
-# Add all components
-mucu add -a
+# Add multiple components
+mucu add toast tooltip popover
 ```
 
-### List Available Components
+Components are copied to your project and ready to import:
 
-```bash
-mucu list
+```tsx
+import { Button } from "@/components/ui/Button";
+
+export default function App() {
+  return (
+    <Button variant="primary" size="md">
+      Click me
+    </Button>
+  );
+}
 ```
 
-### Generate Icon Components from SVGs
+## Components
+
+| Category   | Components                                       |
+| ---------- | ------------------------------------------------ |
+| Layout     | `Box` `Image`                                    |
+| Form       | `TextField` `TextArea` `Checkbox` `RadioGroup`   |
+| Actions    | `Button` `ButtonBase`                            |
+| Feedback   | `Spinner` `Toast` `Tooltip` `Popover`            |
+| Navigation | `Tab` `Calendar` `Menu`                          |
+
+## CLI
 
 ```bash
-mucu icon generate ./icons -o ./src/components/icons
+mucu init                              # Set up config + utilities
+mucu add [components...]               # Add components (interactive if no args)
+mucu add -a                            # Add all components
+mucu list                              # List available components
+mucu icon generate <input> -o <output> # SVG to React icon components
 ```
 
 ## Configuration
 
-After running `mucu init`, a `mucu.config.json` file is created:
+`mucu.config.json`
 
 ```json
 {
@@ -74,40 +87,23 @@ After running `mucu init`, a `mucu.config.json` file is created:
 
 ## Development
 
-### Prerequisites
-
-- Node.js >= 20.0.0
-- pnpm 10.26.1
-
-### Setup
-
 ```bash
-# Install dependencies
-pnpm install
-
-# Run development mode
-pnpm dev
-
-# Build all packages
-pnpm build
-
-# Run tests
-pnpm test
-
-# View components in Storybook
-pnpm storybook
+pnpm install          # Install dependencies
+pnpm dev              # Development mode
+pnpm build            # Build all packages
+pnpm test             # Run tests
+pnpm storybook        # View components in Storybook
 ```
 
-### Project Structure
+```
+packages/
+├── cli/          # CLI tool (mucu command)
+└── registry/     # Component registry + Storybook
+```
 
-```
-mucu/
-├── packages/
-│   ├── cli/          # CLI tool (mucu command)
-│   └── registry/     # Component registry & Storybook
-├── package.json
-└── pnpm-workspace.yaml
-```
+## Tech Stack
+
+React 19 / TypeScript 5 / Tailwind CSS 4 / tailwind-variants / motion/react / Storybook 10 / Vitest / Playwright / pnpm
 
 ## License
 
