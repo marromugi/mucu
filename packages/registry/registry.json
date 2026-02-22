@@ -144,6 +144,18 @@
         { "path": "components/Calendar/type.ts", "type": "component" },
         { "path": "components/Calendar/utils.ts", "type": "component" }
       ]
+    },
+    {
+      "name": "typography",
+      "type": "component",
+      "description": "A polymorphic typography component with variant, size, and weight support",
+      "dependencies": ["tailwind-variants"],
+      "registryDependencies": ["polymorphic"],
+      "files": [
+        { "path": "components/Typography/Typography.tsx", "type": "component" },
+        { "path": "components/Typography/const.ts", "type": "component" },
+        { "path": "components/Typography/type.ts", "type": "component" }
+      ]
     }
   ],
   "utilities": [

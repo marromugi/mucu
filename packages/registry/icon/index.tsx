@@ -31,3 +31,9 @@ export const WarningFill = (props: IconProps) => (
     <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z" />
   </svg>
 )
+
+export const Required = (props: IconProps) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
+    <path d="M12 2l1.09 3.41L16 4l-1.45 3.14L18 8.5l-3.55.45L15 12l-3-2.18L9 12l.55-3.05L6 8.5l3.45-1.36L8 4l2.91 1.41z" />
+  </svg>
+)
