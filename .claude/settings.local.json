@@ -24,7 +24,9 @@
       "Bash(pnpm ls:*)",
       "Bash(pnpm test:storybook:*)",
       "Bash(pnpm test:unit:*)",
-      "Bash(npx vitest:*)"
+      "Bash(npx vitest:*)",
+      "mcp__ide__getDiagnostics",
+      "Bash(ls:*)"
     ],
     "deny": [
       "Bash(npm:*)",
