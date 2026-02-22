@@ -118,6 +118,25 @@
       ]
     },
     {
+      "name": "modal",
+      "type": "component",
+      "description": "An animated modal dialog with portal rendering, scroll lock, focus trap, and polymorphic sub-components",
+      "dependencies": ["tailwind-variants", "motion"],
+      "registryDependencies": ["polymorphic", "cn"],
+      "files": [
+        { "path": "components/Modal/Modal.tsx", "type": "component" },
+        { "path": "components/Modal/ModalHeader.tsx", "type": "component" },
+        { "path": "components/Modal/ModalBody.tsx", "type": "component" },
+        { "path": "components/Modal/ModalFooter.tsx", "type": "component" },
+        { "path": "components/Modal/const.ts", "type": "component" },
+        { "path": "components/Modal/type.ts", "type": "component" },
+        { "path": "components/Modal/context.ts", "type": "component" },
+        { "path": "components/Modal/utils.ts", "type": "component" },
+        { "path": "components/Modal/hooks/useModal/useModal.ts", "type": "component" },
+        { "path": "components/Modal/hooks/useModal/type.ts", "type": "component" }
+      ]
+    },
+    {
       "name": "popover",
       "type": "component",
       "description": "A polymorphic animated popover with configurable placement, alignment, and controlled/uncontrolled modes",
@@ -155,6 +174,86 @@
         { "path": "components/Typography/Typography.tsx", "type": "component" },
         { "path": "components/Typography/const.ts", "type": "component" },
         { "path": "components/Typography/type.ts", "type": "component" }
+      ]
+    },
+    {
+      "name": "checkbox",
+      "type": "component",
+      "description": "A checkbox input with label, size variants, and controlled/uncontrolled modes",
+      "dependencies": ["tailwind-variants"],
+      "registryDependencies": [],
+      "files": [
+        { "path": "components/Checkbox/Checkbox.tsx", "type": "component" },
+        { "path": "components/Checkbox/const.ts", "type": "component" },
+        { "path": "components/Checkbox/type.ts", "type": "component" }
+      ]
+    },
+    {
+      "name": "form-field",
+      "type": "component",
+      "description": "A form field wrapper with label, description, error message, and required indicator",
+      "dependencies": ["tailwind-variants"],
+      "registryDependencies": [],
+      "files": [
+        { "path": "components/FormField/FormField.tsx", "type": "component" },
+        { "path": "components/FormField/const.ts", "type": "component" },
+        { "path": "components/FormField/type.ts", "type": "component" }
+      ]
+    },
+    {
+      "name": "image",
+      "type": "component",
+      "description": "An image component with loading spinner, fallback, and object-fit variants",
+      "dependencies": ["tailwind-variants"],
+      "registryDependencies": ["spinner"],
+      "files": [
+        { "path": "components/Image/Image.tsx", "type": "component" },
+        { "path": "components/Image/const.ts", "type": "component" },
+        { "path": "components/Image/type.ts", "type": "component" }
+      ]
+    },
+    {
+      "name": "menu",
+      "type": "component",
+      "description": "A polymorphic animated context menu with items, dividers, and nested sub-menus",
+      "dependencies": ["tailwind-variants", "motion"],
+      "registryDependencies": ["polymorphic", "cn"],
+      "files": [
+        { "path": "components/Menu/Menu.tsx", "type": "component" },
+        { "path": "components/Menu/MenuItem.tsx", "type": "component" },
+        { "path": "components/Menu/MenuDivider.tsx", "type": "component" },
+        { "path": "components/Menu/MenuSub.tsx", "type": "component" },
+        { "path": "components/Menu/const.ts", "type": "component" },
+        { "path": "components/Menu/type.ts", "type": "component" },
+        { "path": "components/Menu/context.ts", "type": "component" },
+        { "path": "components/Menu/utils.ts", "type": "component" },
+        { "path": "components/Menu/hooks/useMenu/useMenu.ts", "type": "component" },
+        { "path": "components/Menu/hooks/useMenu/type.ts", "type": "component" }
+      ]
+    },
+    {
+      "name": "toast",
+      "type": "component",
+      "description": "An animated toast notification system with provider, portal rendering, and position variants",
+      "dependencies": ["tailwind-variants", "motion"],
+      "registryDependencies": [],
+      "files": [
+        { "path": "components/Toast/Toast.tsx", "type": "component" },
+        { "path": "components/Toast/ToastContainer.tsx", "type": "component" },
+        { "path": "components/Toast/ToastProvider.tsx", "type": "component" },
+        { "path": "components/Toast/const.ts", "type": "component" },
+        { "path": "components/Toast/type.ts", "type": "component" },
+        { "path": "components/Toast/context.ts", "type": "component" },
+        { "path": "components/Toast/utils.tsx", "type": "component" },
+        { "path": "components/Toast/icons/CheckCircleFill.tsx", "type": "component" },
+        { "path": "components/Toast/icons/ErrorFill.tsx", "type": "component" },
+        { "path": "components/Toast/icons/InfoFill.tsx", "type": "component" },
+        { "path": "components/Toast/icons/WarningFill.tsx", "type": "component" },
+        { "path": "components/Toast/icons/Close.tsx", "type": "component" },
+        { "path": "components/Toast/hooks/useToast/useToast.ts", "type": "component" },
+        { "path": "components/Toast/hooks/useToast/type.ts", "type": "component" },
+        { "path": "components/Toast/hooks/useToastProgress/useToastProgress.ts", "type": "component" },
+        { "path": "components/Toast/hooks/useToastProgress/type.ts", "type": "component" }
       ]
     }
   ],
