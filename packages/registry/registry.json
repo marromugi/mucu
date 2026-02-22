@@ -11,7 +11,8 @@
       "files": [
         { "path": "components/Box/Box.tsx", "type": "component" },
         { "path": "components/Box/const.ts", "type": "component" },
-        { "path": "components/Box/type.ts", "type": "component" }
+        { "path": "components/Box/type.ts", "type": "component" },
+        { "path": "components/Box/index.ts", "type": "component" }
       ]
     },
     {
@@ -23,7 +24,8 @@
       "files": [
         { "path": "components/Spinner/Spinner.tsx", "type": "component" },
         { "path": "components/Spinner/const.ts", "type": "component" },
-        { "path": "components/Spinner/type.ts", "type": "component" }
+        { "path": "components/Spinner/type.ts", "type": "component" },
+        { "path": "components/Spinner/index.ts", "type": "component" }
       ]
     },
     {
@@ -35,7 +37,8 @@
       "files": [
         { "path": "components/ButtonBase/ButtonBase.tsx", "type": "component" },
         { "path": "components/ButtonBase/const.ts", "type": "component" },
-        { "path": "components/ButtonBase/type.ts", "type": "component" }
+        { "path": "components/ButtonBase/type.ts", "type": "component" },
+        { "path": "components/ButtonBase/index.ts", "type": "component" }
       ]
     },
     {
@@ -47,7 +50,8 @@
       "files": [
         { "path": "components/Button/Button.tsx", "type": "component" },
         { "path": "components/Button/const.ts", "type": "component" },
-        { "path": "components/Button/type.ts", "type": "component" }
+        { "path": "components/Button/type.ts", "type": "component" },
+        { "path": "components/Button/index.ts", "type": "component" }
       ]
     },
     {
@@ -63,7 +67,8 @@
         { "path": "components/RadioGroup/type.ts", "type": "component" },
         { "path": "components/RadioGroup/context.ts", "type": "component" },
         { "path": "components/RadioGroup/hooks/useRadioGroup/useRadioGroup.ts", "type": "component" },
-        { "path": "components/RadioGroup/hooks/useRadioGroup/type.ts", "type": "component" }
+        { "path": "components/RadioGroup/hooks/useRadioGroup/type.ts", "type": "component" },
+        { "path": "components/RadioGroup/index.ts", "type": "component" }
       ]
     },
     {
@@ -75,7 +80,8 @@
       "files": [
         { "path": "components/Tab/Tab.tsx", "type": "component" },
         { "path": "components/Tab/const.ts", "type": "component" },
-        { "path": "components/Tab/type.ts", "type": "component" }
+        { "path": "components/Tab/type.ts", "type": "component" },
+        { "path": "components/Tab/index.ts", "type": "component" }
       ]
     },
     {
@@ -90,7 +96,8 @@
         { "path": "components/Tooltip/type.ts", "type": "component" },
         { "path": "components/Tooltip/utils.ts", "type": "component" },
         { "path": "components/Tooltip/hooks/useTooltip/useTooltip.ts", "type": "component" },
-        { "path": "components/Tooltip/hooks/useTooltip/type.ts", "type": "component" }
+        { "path": "components/Tooltip/hooks/useTooltip/type.ts", "type": "component" },
+        { "path": "components/Tooltip/index.ts", "type": "component" }
       ]
     },
     {
@@ -102,7 +109,8 @@
       "files": [
         { "path": "components/TextField/TextField.tsx", "type": "component" },
         { "path": "components/TextField/const.ts", "type": "component" },
-        { "path": "components/TextField/type.ts", "type": "component" }
+        { "path": "components/TextField/type.ts", "type": "component" },
+        { "path": "components/TextField/index.ts", "type": "component" }
       ]
     },
     {
@@ -114,7 +122,8 @@
       "files": [
         { "path": "components/TextArea/TextArea.tsx", "type": "component" },
         { "path": "components/TextArea/const.ts", "type": "component" },
-        { "path": "components/TextArea/type.ts", "type": "component" }
+        { "path": "components/TextArea/type.ts", "type": "component" },
+        { "path": "components/TextArea/index.ts", "type": "component" }
       ]
     },
     {
@@ -133,7 +142,8 @@
         { "path": "components/Modal/context.ts", "type": "component" },
         { "path": "components/Modal/utils.ts", "type": "component" },
         { "path": "components/Modal/hooks/useModal/useModal.ts", "type": "component" },
-        { "path": "components/Modal/hooks/useModal/type.ts", "type": "component" }
+        { "path": "components/Modal/hooks/useModal/type.ts", "type": "component" },
+        { "path": "components/Modal/index.ts", "type": "component" }
       ]
     },
     {
@@ -148,7 +158,8 @@
         { "path": "components/Popover/type.ts", "type": "component" },
         { "path": "components/Popover/utils.ts", "type": "component" },
         { "path": "components/Popover/hooks/usePopover/usePopover.ts", "type": "component" },
-        { "path": "components/Popover/hooks/usePopover/type.ts", "type": "component" }
+        { "path": "components/Popover/hooks/usePopover/type.ts", "type": "component" },
+        { "path": "components/Popover/index.ts", "type": "component" }
       ]
     },
     {
@@ -161,7 +172,8 @@
         { "path": "components/Calendar/Calendar.tsx", "type": "component" },
         { "path": "components/Calendar/const.ts", "type": "component" },
         { "path": "components/Calendar/type.ts", "type": "component" },
-        { "path": "components/Calendar/utils.ts", "type": "component" }
+        { "path": "components/Calendar/utils.ts", "type": "component" },
+        { "path": "components/Calendar/index.ts", "type": "component" }
       ]
     },
     {
@@ -173,7 +185,8 @@
       "files": [
         { "path": "components/Typography/Typography.tsx", "type": "component" },
         { "path": "components/Typography/const.ts", "type": "component" },
-        { "path": "components/Typography/type.ts", "type": "component" }
+        { "path": "components/Typography/type.ts", "type": "component" },
+        { "path": "components/Typography/index.ts", "type": "component" }
       ]
     },
     {
@@ -185,7 +198,8 @@
       "files": [
         { "path": "components/Checkbox/Checkbox.tsx", "type": "component" },
         { "path": "components/Checkbox/const.ts", "type": "component" },
-        { "path": "components/Checkbox/type.ts", "type": "component" }
+        { "path": "components/Checkbox/type.ts", "type": "component" },
+        { "path": "components/Checkbox/index.ts", "type": "component" }
       ]
     },
     {
@@ -197,7 +211,8 @@
       "files": [
         { "path": "components/FormField/FormField.tsx", "type": "component" },
         { "path": "components/FormField/const.ts", "type": "component" },
-        { "path": "components/FormField/type.ts", "type": "component" }
+        { "path": "components/FormField/type.ts", "type": "component" },
+        { "path": "components/FormField/index.ts", "type": "component" }
       ]
     },
     {
@@ -209,7 +224,8 @@
       "files": [
         { "path": "components/Image/Image.tsx", "type": "component" },
         { "path": "components/Image/const.ts", "type": "component" },
-        { "path": "components/Image/type.ts", "type": "component" }
+        { "path": "components/Image/type.ts", "type": "component" },
+        { "path": "components/Image/index.ts", "type": "component" }
       ]
     },
     {
@@ -228,7 +244,8 @@
         { "path": "components/Menu/context.ts", "type": "component" },
         { "path": "components/Menu/utils.ts", "type": "component" },
         { "path": "components/Menu/hooks/useMenu/useMenu.ts", "type": "component" },
-        { "path": "components/Menu/hooks/useMenu/type.ts", "type": "component" }
+        { "path": "components/Menu/hooks/useMenu/type.ts", "type": "component" },
+        { "path": "components/Menu/index.ts", "type": "component" }
       ]
     },
     {
@@ -253,7 +270,8 @@
         { "path": "components/Toast/hooks/useToast/useToast.ts", "type": "component" },
         { "path": "components/Toast/hooks/useToast/type.ts", "type": "component" },
         { "path": "components/Toast/hooks/useToastProgress/useToastProgress.ts", "type": "component" },
-        { "path": "components/Toast/hooks/useToastProgress/type.ts", "type": "component" }
+        { "path": "components/Toast/hooks/useToastProgress/type.ts", "type": "component" },
+        { "path": "components/Toast/index.ts", "type": "component" }
       ]
     }
   ],
