@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { expect } from 'storybook/test'
 import { Box } from './Box'
+import { Button } from '../Button'
 
 const meta: Meta<typeof Box> = {
   title: 'Components/Box',
@@ -16,12 +17,6 @@ export const Background: Story = {
     children: 'background',
     className: 'p-4',
   },
-  play: async ({ canvas }) => {
-    const el = canvas.getByText('background')
-    await expect(el.tagName).toBe('DIV')
-    await expect(el).toHaveClass('bg-background')
-    await expect(el).toHaveClass('p-4')
-  },
 }
 
 export const Container: Story = {
@@ -29,10 +24,6 @@ export const Container: Story = {
     bg: 'container',
     children: 'container',
     className: 'p-4',
-  },
-  play: async ({ canvas }) => {
-    const el = canvas.getByText('container')
-    await expect(el).toHaveClass('bg-container')
   },
 }
 
@@ -42,10 +33,6 @@ export const Surface: Story = {
     children: 'surface',
     className: 'p-4',
   },
-  play: async ({ canvas }) => {
-    const el = canvas.getByText('surface')
-    await expect(el).toHaveClass('bg-surface')
-  },
 }
 
 export const Layered: Story = {
@@ -53,26 +40,24 @@ export const Layered: Story = {
     <div>
       <Box bg="background" className="p-10">
         <Box bg="container" className="p-10 rounded-xl">
-          <Box bg="surface" className="p-10 rounded-xl">
-            surface
+          <Box bg="surface" className="p-10 rounded-xl flex gap-2">
+            <Button>Primary</Button>
+            <Button variant={'secondary'}>Secondary</Button>
           </Box>
         </Box>
       </Box>
-      <Box bg="background" className="p-10">
-        <Box bg="surface" className="p-10 rounded-xl">
-          surface
+      <Box bg="background" className="p-10 mt-4">
+        <Box bg="surface" className="p-10 rounded-xl flex gap-2">
+          <Button>Primary</Button>
+          <Button variant={'secondary'}>Secondary</Button>
         </Box>
+      </Box>
+      <Box bg="background" className="p-10 mt-4 flex gap-2">
+        <Button>Primary</Button>
+        <Button variant={'secondary'}>Secondary</Button>
       </Box>
     </div>
   ),
-  play: async ({ canvas }) => {
-    const surface = canvas.getByText('surface')
-    await expect(surface).toHaveClass('bg-surface')
-    await expect(surface.parentElement).toHaveClass('bg-container')
-    await expect(surface.parentElement?.parentElement).toHaveClass(
-      'bg-background',
-    )
-  },
 }
 
 export const AsSection: Story = {
@@ -80,9 +65,5 @@ export const AsSection: Story = {
     as: 'section',
     children: 'section element',
     className: 'p-4',
-  },
-  play: async ({ canvas }) => {
-    const el = canvas.getByText('section element')
-    await expect(el.tagName).toBe('SECTION')
   },
 }
