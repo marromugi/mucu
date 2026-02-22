@@ -16,7 +16,15 @@
       "WebFetch(domain:storybook.js.org)",
       "Bash(pnpm --filter registry vitest run:*)",
       "Bash(npx tsc:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(pnpm --filter @mucu/registry test:run:*)",
+      "Bash(pnpm vitest run:*)",
+      "Bash(pnpm --filter registry test -- --run packages/registry/components/Popover/Popover.test.tsx)",
+      "Bash(npx vitest run:*)",
+      "Bash(pnpm ls:*)",
+      "Bash(pnpm test:storybook:*)",
+      "Bash(pnpm test:unit:*)",
+      "Bash(npx vitest:*)"
     ],
     "deny": [
       "Bash(npm:*)",
