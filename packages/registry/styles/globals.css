@@ -126,8 +126,8 @@
    ---------------------------------------- */
 :root {
   /* Background */
-  --background: #e0e8ed;
-  --container: #d0d9e0;
+  --background: #f4f9fd;
+  --container: #e8edf2;
   --surface: #ffffff;
   --overlay: rgb(0 0 0 / 0.5);
 
@@ -227,8 +227,8 @@
    ---------------------------------------- */
 [data-theme='light'] {
   /* Background */
-  --background: #e0e8ed;
-  --container: #d0d9e0;
+  --background: #f4f9fd;
+  --container: #e8edf2;
   --surface: #ffffff;
   --overlay: rgb(0 0 0 / 0.5);
 
