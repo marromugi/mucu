@@ -1,5 +1,11 @@
 # mucu
 
+## 0.3.0
+
+### Minor Changes
+
+- 1aa85e2: Add Table component, add indeterminate state support to Checkbox, and lighten background/container colors in light theme
+
 ## 0.2.0
 
 ### Minor Changes
