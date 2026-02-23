@@ -136,4 +136,47 @@ describe('Checkbox', () => {
     expect(input).toHaveAttribute('data-testid', 'my-checkbox')
     expect(input).toHaveAttribute('name', 'agree')
   })
+
+  describe('indeterminate', () => {
+    it('sets indeterminate property on the input element', () => {
+      render(<Checkbox indeterminate />)
+      const input = screen.getByRole('checkbox') as HTMLInputElement
+      expect(input.indeterminate).toBe(true)
+    })
+
+    it('sets aria-checked to mixed when indeterminate', () => {
+      render(<Checkbox indeterminate />)
+      const input = screen.getByRole('checkbox')
+      expect(input).toHaveAttribute('aria-checked', 'mixed')
+    })
+
+    it('does not set aria-checked when not indeterminate', () => {
+      render(<Checkbox />)
+      const input = screen.getByRole('checkbox')
+      expect(input).not.toHaveAttribute('aria-checked')
+    })
+
+    it('supports indeterminate with disabled', () => {
+      render(<Checkbox indeterminate disabled />)
+      const input = screen.getByRole('checkbox') as HTMLInputElement
+      expect(input.indeterminate).toBe(true)
+      expect(input).toBeDisabled()
+    })
+
+    it('clears indeterminate when prop changes to false', () => {
+      const { rerender } = render(<Checkbox indeterminate />)
+      const input = screen.getByRole('checkbox') as HTMLInputElement
+      expect(input.indeterminate).toBe(true)
+
+      rerender(<Checkbox indeterminate={false} />)
+      expect(input.indeterminate).toBe(false)
+    })
+
+    it('forwards ref correctly when indeterminate', () => {
+      const ref = React.createRef<HTMLInputElement>()
+      render(<Checkbox ref={ref} indeterminate />)
+      expect(ref.current).toBeInstanceOf(HTMLInputElement)
+      expect(ref.current?.indeterminate).toBe(true)
+    })
+  })
 })

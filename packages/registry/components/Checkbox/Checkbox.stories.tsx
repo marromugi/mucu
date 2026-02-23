@@ -17,6 +17,10 @@ const meta: Meta<typeof Checkbox> = {
       control: 'boolean',
       description: '無効状態',
     },
+    indeterminate: {
+      control: 'boolean',
+      description: '不確定状態',
+    },
     label: {
       control: 'text',
       description: 'ラベルテキスト',
@@ -96,6 +100,40 @@ export const DisabledChecked: Story = {
     const checkbox = canvas.getByRole('checkbox')
     await expect(checkbox).toBeDisabled()
     await expect(checkbox).toBeChecked()
+  },
+}
+
+export const Indeterminate: Story = {
+  args: {
+    label: '不確定状態',
+    indeterminate: true,
+  },
+  play: async ({ canvas }) => {
+    const checkbox = canvas.getByRole('checkbox')
+    await expect(checkbox).toHaveAttribute('aria-checked', 'mixed')
+  },
+}
+
+export const IndeterminateSizes: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+      <Checkbox size="sm" label="Small" indeterminate />
+      <Checkbox size="md" label="Medium" indeterminate />
+      <Checkbox size="lg" label="Large" indeterminate />
+    </div>
+  ),
+}
+
+export const IndeterminateDisabled: Story = {
+  args: {
+    label: '不確定 + 無効',
+    indeterminate: true,
+    disabled: true,
+  },
+  play: async ({ canvas }) => {
+    const checkbox = canvas.getByRole('checkbox')
+    await expect(checkbox).toBeDisabled()
+    await expect(checkbox).toHaveAttribute('aria-checked', 'mixed')
   },
 }
 

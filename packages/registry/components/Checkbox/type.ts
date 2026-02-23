@@ -6,8 +6,10 @@ export type CheckboxOwnProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'size
   VariantProps<typeof checkboxVariants> & {
     /** チェック状態 */
     checked?: boolean
+    /** 不確定状態 @default false */
+    indeterminate?: boolean
     /** チェック状態変更ハンドラ */
-    onCheckedChange?: (checked: boolean) => void
+    onCheckedChange?: (checked: boolean | 'indeterminate') => void
     /** 無効状態 @default false */
     disabled?: boolean
     /** サイズ @default 'md' */
