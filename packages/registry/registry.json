@@ -249,6 +249,19 @@
       ]
     },
     {
+      "name": "table",
+      "type": "component",
+      "description": "Primitive styled table components for composing data tables",
+      "dependencies": ["tailwind-variants"],
+      "registryDependencies": ["polymorphic"],
+      "files": [
+        { "path": "components/Table/Table.tsx", "type": "component" },
+        { "path": "components/Table/const.ts", "type": "component" },
+        { "path": "components/Table/type.ts", "type": "component" },
+        { "path": "components/Table/index.ts", "type": "component" }
+      ]
+    },
+    {
       "name": "toast",
       "type": "component",
       "description": "An animated toast notification system with provider, portal rendering, and position variants",
