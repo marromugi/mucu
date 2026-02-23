@@ -1,5 +1,11 @@
 # mucu
 
+## 0.2.0
+
+### Minor Changes
+
+- 3304dcb: Add automatic path alias detection from tsconfig.json/jsconfig.json. The CLI now automatically detects existing path aliases from your TypeScript/JavaScript configuration and uses them during component initialization, with an interactive prompt to customize if needed.
+
 ## 0.1.2
 
 ### Patch Changes

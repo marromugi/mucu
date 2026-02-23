@@ -1,6 +1,6 @@
 {
   "name": "mucu",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Add React components to your project",
   "type": "module",
   "bin": {
