@@ -65,7 +65,7 @@ Extract the following elements:
 | Scope | Package | Include in changeset? |
 |---------|-----------|--------------|
 | `cli` | `mucu` | Yes |
-| `registry` | `@mucu/registry` | No (excluded in changesets config) |
+| `registry` | `mucu` | Yes — `registry.json` and component source files are bundled into the CLI at build time via `copy-registry.ts`, so registry changes require a new CLI release for users to receive them |
 | `deps` | Depends on files changed | Only if `packages/cli/` is affected |
 | `release` | Release infrastructure | No |
 
@@ -76,6 +76,8 @@ git show --stat --format="" <COMMIT_HASH>
 ```
 
 Include in changeset only if files under `packages/cli/` are affected.
+
+> **Note:** `@mucu/registry` is excluded in `.changeset/config.json` because it is a private package not published to npm. However, registry changes still affect the published `mucu` CLI package since the registry is embedded in the CLI distribution. Always generate changesets targeting `mucu` for registry-scoped commits.
 
 #### Commit Type to Bump Level Mapping
 
@@ -209,7 +211,7 @@ Next steps:
 
 ### 7. Important Notes
 
-- The only target package for changesets is `mucu`. `@mucu/registry` is excluded in `.changeset/config.json`
+- The only target package for changesets is `mucu`. `@mucu/registry` is excluded in `.changeset/config.json` because it is private, but `registry`-scoped commits should still generate changesets for `mucu` since `registry.json` and component files are bundled into the CLI at build time
 - This project enforces `scope-empty: never` via commitlint, so all commits should have a scope. If a commit lacks a scope, fall back to file path analysis
 - If `revert`-type commits are found, do NOT auto-determine the bump level — warn that manual review is required
 - If unconsumed changeset files already exist in `.changeset/` (`.md` files other than `README.md` and `config.json`), notify the user and ask whether to append to the existing changeset or create a new one
